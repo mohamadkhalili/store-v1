@@ -1,11 +1,21 @@
 <template>
   <v-card>
     <nav>
-      <v-list-item>
+      <v-toolbar-items class="hidden-sm-and-down">
+
+        <img src="logo.png"
+             alt="Vuetify.js"
+             class="ma-1"
+             height="60px"/>
+
         <DynamicMenu :data-prop="product_menues" name="محصولات"/>
-        <DynamicMenu :data-prop="posts_menues" name="مطالب"/>
+        <v-divider vertical></v-divider>
+        <DynamicMenu :data-prop="product_menues" name="مطالب"/>
+        <v-divider vertical></v-divider>
         <StaticMenu title="درباره ما"/>
-      </v-list-item>
+        <v-divider vertical></v-divider>
+        <StaticMenu title="ارتباط با ما"/>
+      </v-toolbar-items>
     </nav>
   </v-card>
 </template>
