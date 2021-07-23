@@ -3,10 +3,13 @@
     <nav>
       <v-toolbar-items class="hidden-sm-and-down">
 
-        <img src="logo.png"
-             alt="Vuetify.js"
-             class="ma-1"
-             height="60px"/>
+        <router-link to="/">
+          <img src="logo.png"
+               alt="Vuetify.js"
+               class="l-1 mt-1 mr-5"
+               height="60px"
+          />
+        </router-link>
 
         <DynamicMenu :data-prop="product_menues" name="محصولات"/>
         <v-divider vertical></v-divider>

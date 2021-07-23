@@ -1,7 +1,7 @@
 <template>
   <div class="text-center">
     <v-list-item
-      class="lg12 pl-6 pr-6"
+      class="fill-height lg12 pl-6 pr-6"
       color="primary"
       link
       v-bind="attrs"

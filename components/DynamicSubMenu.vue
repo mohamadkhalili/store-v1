@@ -4,27 +4,20 @@
       open-on-hover
       offset-x
       left>
-      <template v-slot:activator="{ on, attrs }">
-        <v-list-item
-          class="lg12 pl-6 pr-6"
+      <template v-slot:activator="{ on, attrs }" class="d-block">
+
+        <v-list-item-title
+
+          plain
           color="primary"
-          link
+          class="col-12 md-12 text-button pa-6 pr-8 pl-8 ma-0 d-block"
+          style="font-family: Vazir !important;width: 100%"
+          dark
           v-bind="attrs"
           v-on="on"
         >
-          <v-list-item-title
-
-            plain
-            color="primary"
-            class="text-button pl-0 pr-0 ma-0"
-            style="font-family: Vazir !important;"
-            dark
-
-
-          >
-            {{ name }}
-          </v-list-item-title>
-        </v-list-item>
+          {{ name }}
+        </v-list-item-title>
       </template>
       <v-list
 
@@ -38,6 +31,8 @@
           :to="menu.url"
           color="primary"
           link
+          v-bind="attrs"
+          v-on="on"
         >
           <v-list-item-title
 
@@ -46,8 +41,7 @@
             plain
             color="primary"
             dark
-            v-bind="attrs"
-            v-on="on"
+
 
           >
             {{ menu.name }}

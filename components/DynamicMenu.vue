@@ -7,7 +7,7 @@
       v-if=" menus && menus[0] && menus[0].url != null ? !isHidden : isHidden">
       <template v-slot:activator="{ on, attrs }">
         <v-list-item
-          class="lg12 pl-6 pr-6"
+          class="fill-height lg12 pl-6 pr-6"
           color="primary"
           link
           v-bind="attrs"
@@ -33,6 +33,8 @@
           :to="menu.url"
           color="primary"
           link
+          v-bind="attrs"
+          v-on="on"
         >
 
           <DynamicSubMenu :data-prop="menu.root_set" :name="menu.name"/>
