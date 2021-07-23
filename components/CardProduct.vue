@@ -1,7 +1,7 @@
 <template>
   <v-card
     :loading="loading"
-    class="mx-auto my-12"
+    class="mx-auto my-12 pa-2"
     max-width="374"
   >
     <template slot="progress">
@@ -14,10 +14,10 @@
 
     <v-img
       height="250"
-      src="https://cdn.vuetifyjs.com/images/cards/cooking.png"
+      :src="product.image_icon"
     ></v-img>
 
-    <v-card-title>Cafe Badilico</v-card-title>
+    <v-card-title>{{ product.title }}</v-card-title>
 
     <v-card-text>
       <v-row
@@ -25,7 +25,7 @@
         class="mx-0"
       >
         <v-rating
-          :value="4.5"
+          :value="product.rating"
           color="amber"
           dense
           half-increments
@@ -34,36 +34,29 @@
         ></v-rating>
 
         <div class="grey--text ms-4">
-          4.5 (413)
+          {{ product.rating }}
         </div>
       </v-row>
-
       <div class="my-4 text-subtitle-1">
-        $ • Italian, Cafe
+        <v-row
+          align="center"
+          class="mx-0"
+        >
+          <div class="my-4 text-subtitle-1">
+            {{ product.price }}
+          </div>
+
+          <v-chip class="grey--text ms-4" :color=" product.available ? available_color : null">
+            {{ product.available ? "موجود" : "ناموجود" }}
+          </v-chip>
+        </v-row>
       </div>
 
-      <div>Small plates, salads & sandwiches - an intimate setting with 12 indoor seats plus patio seating.</div>
+      <div>{{ product.brief_description }}</div>
     </v-card-text>
 
     <v-divider class="mx-4"></v-divider>
 
-    <v-card-title>Tonight's availability</v-card-title>
-
-    <v-card-text>
-      <v-chip-group
-        v-model="selection"
-        active-class="deep-purple accent-4 white--text"
-        column
-      >
-        <v-chip>5:30PM</v-chip>
-
-        <v-chip>7:30PM</v-chip>
-
-        <v-chip>8:00PM</v-chip>
-
-        <v-chip>9:00PM</v-chip>
-      </v-chip-group>
-    </v-card-text>
 
     <v-card-actions>
       <v-btn
@@ -71,7 +64,7 @@
         text
         @click="reserve"
       >
-        Reserve
+        افزودن به سبد خرید
       </v-btn>
     </v-card-actions>
   </v-card>
@@ -79,7 +72,25 @@
 
 <script>
 export default {
-  name: "CardProduct"
+  name: "CardProduct",
+  data() {
+    return {
+      product: null,
+      available_color: "green accent-2"
+    }
+  },
+  props: {
+    product: Object
+  },
+  watch: {
+    product: {
+      immediate: true,
+      deep: true,
+      handler(newV) {
+        this.product = newV
+      }
+    },
+  },
 }
 </script>
 

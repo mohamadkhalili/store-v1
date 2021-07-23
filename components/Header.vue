@@ -13,7 +13,7 @@
 
         <DynamicMenu :data-prop="product_menues" name="محصولات"/>
         <v-divider vertical></v-divider>
-        <DynamicMenu :data-prop="product_menues" name="مطالب"/>
+        <DynamicMenu :data-prop="posts_menues" name="مطالب"/>
         <v-divider vertical></v-divider>
         <StaticMenu title="درباره ما"/>
         <v-divider vertical></v-divider>
@@ -43,10 +43,8 @@ export default {
   mounted() {
     axios.get("http://192.168.114.101:3000/product_root_list/")
       .then(response => {
-        console.log(this.product_menues)
         this.product_menues = response.data.product_menues
         this.posts_menues = response.data.posts_menues
-        console.log(this.product_menues)
       })
       .catch()
   }

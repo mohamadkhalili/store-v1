@@ -63,7 +63,6 @@ export default {
       deep: true,
       handler(newV) {
         this.menus = newV
-        console.log(newV)
       }
     },
   },
