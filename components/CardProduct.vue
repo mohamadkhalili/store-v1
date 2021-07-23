@@ -12,10 +12,13 @@
       ></v-progress-linear>
     </template>
 
-    <v-img
-      height="250"
-      :src="product.image_icon"
-    ></v-img>
+    <router-link
+      :to="product.url">
+      <v-img
+        height="250"
+        :src="product.image_icon"
+      ></v-img>
+    </router-link>
 
     <v-card-title>{{ product.title }}</v-card-title>
 
