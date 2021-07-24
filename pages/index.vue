@@ -16,7 +16,7 @@
         <v-card-title class="headline">
           پست های پیشنهادی
         </v-card-title>
-        <ListCardPosts/>
+        <GridCardPost :posts="posts"/>
       </v-card>
     </v-col>
   </v-row>
@@ -26,9 +26,10 @@ import MySlider from "../components/MySlider";
 import GridCardProduct from "../components/GridCardProduct";
 import axios from "axios";
 import ListCardPosts from "../components/ListCardPosts";
+import GridCardPost from "../components/GridCardPost";
 
 export default {
-  components: {ListCardPosts, GridCardProduct, MySlider},
+  components: {GridCardPost, ListCardPosts, GridCardProduct, MySlider},
   data() {
     return {
       products: null,

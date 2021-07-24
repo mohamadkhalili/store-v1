@@ -3,6 +3,8 @@
     :loading="loading"
     class="mx-auto my-12 pa-2"
     max-width="374"
+    max-height="521"
+    height="521"
   >
     <template slot="progress">
       <v-progress-linear
@@ -16,11 +18,15 @@
       :to="product.url">
       <v-img
         height="250"
+        max-height="250"
         :src="product.image_icon"
       ></v-img>
     </router-link>
 
-    <v-card-title>{{ product.title }}</v-card-title>
+    <v-card-title style="height: 64px;max-height: 64px;flex-wrap: nowrap;overflow-x: auto;">{{
+        product.title
+      }}
+    </v-card-title>
 
     <v-card-text>
       <v-row
@@ -55,7 +61,10 @@
         </v-row>
       </div>
 
-      <div>{{ product.brief_description }}</div>
+      <div
+        style="height: 44px;max-height: 44px;flex-wrap: nowrap;overflow-x: auto;"
+      >{{ product.brief_description }}
+      </div>
     </v-card-text>
 
     <v-divider class="mx-4"></v-divider>
