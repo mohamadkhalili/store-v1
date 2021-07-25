@@ -23,10 +23,23 @@
       ></v-img>
     </router-link>
 
-    <v-card-title style="height: 64px;max-height: 64px;flex-wrap: nowrap;overflow-x: auto;">{{
+    <router-link
+      :to="post.root.url" class="text-decoration-none">
+      <h6 pill :to="post.root.url" class=" black--text ms-4 mt-3 text-decoration-none "
+
+          style="color: #e51a2d !important;font-family: tanha !important;"
+          :color="available_color">
+        {{ post.root.name }}
+
+      </h6>
+    </router-link>
+
+    <v-card-title class="text-h6"
+                  style="height: 64px;max-height: 64px;flex-wrap: nowrap;overflow-x: auto;font-family: IRANYekan">{{
         post.title
       }}
     </v-card-title>
+
 
     <v-card-text>
 
@@ -38,6 +51,26 @@
 
     <v-divider class="mx-4"></v-divider>
 
+    <v-card-text>
+      <div class="my-4 text-subtitle-1">
+        <v-row
+          align="center"
+          class="mx-0"
+        >
+          <v-chip v-on="on" pill :to="post.root.url" class="black--text" color="available_color">
+            {{ post.author.name }}
+          </v-chip>
+          <v-spacer></v-spacer>
+
+          <div class="text-caption my-4 text-subtitle-1">
+            {{ post.published_date }}
+          </div>
+
+
+        </v-row>
+      </div>
+    </v-card-text>
+
   </v-card>
 </template>
 
@@ -47,7 +80,7 @@ export default {
   data() {
     return {
       post: null,
-      available_color: "green accent-2"
+      available_color: "#e51a2d"
     }
   },
   props: {

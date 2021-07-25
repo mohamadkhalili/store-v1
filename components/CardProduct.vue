@@ -54,8 +54,9 @@
           <div class="my-4 text-subtitle-1">
             {{ product.price }}
           </div>
+          <v-spacer></v-spacer>
 
-          <v-chip class="grey--text ms-4" :color=" product.available ? available_color : null">
+          <v-chip class="black--text ms-4" :color=" product.available ? available_color : null">
             {{ product.available ? "موجود" : "ناموجود" }}
           </v-chip>
         </v-row>

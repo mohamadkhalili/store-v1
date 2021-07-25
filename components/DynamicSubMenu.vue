@@ -5,7 +5,6 @@
       offset-x
       left>
       <template v-slot:activator="{ on, attrs }" class="d-block">
-
         <v-list-item-title
 
           plain

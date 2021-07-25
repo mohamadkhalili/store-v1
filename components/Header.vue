@@ -4,10 +4,12 @@
       <v-toolbar-items class="hidden-sm-and-down">
 
         <router-link to="/">
-          <img src="logo.png"
-               alt="Vuetify.js"
-               class="l-1 mt-1 mr-5"
-               height="60px"
+          <v-img src="/logo.png"
+                 alt="Vuetify.js"
+                 class="l-1 mt-1 mr-5"
+                 height="60px"
+                 width="60px"
+                 contain
           />
         </router-link>
 
@@ -41,10 +43,14 @@ export default {
     }
   },
   mounted() {
-    axios.get("http://192.168.114.101:3000/product_root_list/")
+    axios.get("http://192.168.114.101:3000/products/roots/")
       .then(response => {
         this.product_menues = response.data.product_menues
-        this.posts_menues = response.data.posts_menues
+      })
+      .catch()
+    axios.get("http://192.168.114.101:3000/posts/roots/")
+      .then(response => {
+        this.posts_menues = response.data.post_menues
       })
       .catch()
   }
