@@ -1,10 +1,10 @@
 <template>
-  <h1>hbuihgiuguy</h1>
+
 </template>
 
 <script>
 export default {
-  name: "index"
+  name: "CardProductRelated"
 }
 </script>
 

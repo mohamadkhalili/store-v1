@@ -17,9 +17,10 @@
     <router-link
       :to="product.url">
       <v-img
+        contain
         height="250"
         max-height="250"
-        :src="product.image_icon"
+        :src="product.image_icon.image"
       ></v-img>
     </router-link>
 
@@ -51,9 +52,9 @@
           align="center"
           class="mx-0"
         >
-          <div class="my-4 text-subtitle-1">
-            {{ product.price }}
-          </div>
+          <h3 class="my-4">
+            {{ price_persian }} تومان
+          </h3>
           <v-spacer></v-spacer>
 
           <v-chip class="black--text ms-4" :color=" product.available ? available_color : null">
@@ -62,23 +63,23 @@
         </v-row>
       </div>
 
-      <div
-        style="height: 44px;max-height: 44px;flex-wrap: nowrap;overflow-x: auto;"
-      >{{ product.brief_description }}
-      </div>
     </v-card-text>
 
     <v-divider class="mx-4"></v-divider>
 
 
     <v-card-actions>
-      <v-btn
-        color="deep-purple lighten-2"
-        text
-        @click="reserve"
-      >
-        افزودن به سبد خرید
-      </v-btn>
+      <v-col class="col-auto mr-auto">
+        <v-btn
+          class="white--text"
+          color="red darken-1"
+          large
+          :disabled="product && product.available ? false : true"
+        >
+          افزودن به سبد خرید
+        </v-btn>
+
+      </v-col>
     </v-card-actions>
   </v-card>
 </template>
@@ -89,7 +90,8 @@ export default {
   data() {
     return {
       product: null,
-      available_color: "green accent-2"
+      available_color: "green accent-2",
+      price_persian: ""
     }
   },
   props: {
@@ -101,9 +103,46 @@ export default {
       deep: true,
       handler(newV) {
         this.product = newV
+        this.price_persian = this.getPersianNumbers(this.product.price)
       }
     },
   },
+  methods: {
+    getPersianNumbers(price_number) {
+      var out = ""
+      const price_l = price_number.length
+      for (let i = 0; i < price_l; i++) {
+        let lastnumber = price_number % 10;
+        price_number = parseInt(price_number / 10)
+        if (i % 3 == 0 && i < price_l - 1 && i > 1) {
+          out = "," + out
+        }
+        if (lastnumber == 0) {
+          out = "۰" + out
+        } else if (lastnumber == 1) {
+          out = "۱" + out
+        } else if (lastnumber == 2) {
+          out = "۲" + out
+        } else if (lastnumber == 3) {
+          out = "۳" + out
+        } else if (lastnumber == 4) {
+          out = "۴" + out
+        } else if (lastnumber == 5) {
+          out = "۵" + out
+        } else if (lastnumber == 6) {
+          out = "۶" + out
+        } else if (lastnumber == 7) {
+          out = "۷" + out
+        } else if (lastnumber == 8) {
+          out = "۸" + out
+        } else if (lastnumber == 9) {
+          out = "۹" + out
+        }
+
+      }
+      return out
+    }
+  }
 }
 </script>
 

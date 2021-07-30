@@ -17,9 +17,10 @@
     <router-link
       :to="post.url">
       <v-img
+        contain
         height="250"
         max-height="250"
-        :src="post.image_icon"
+        :src="post.image_icon.image"
       ></v-img>
     </router-link>
 

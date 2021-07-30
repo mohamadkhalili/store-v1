@@ -24,6 +24,7 @@ export default {
       {name: 'format-detection', content: 'telephone=no'}
     ],
     link: [
+      {rel: 'stylesheet', href: 'assets/web_fonts/tanha-font-v0.9/Tanha.ttf'},
       {rel: 'icon', type: 'image/x-icon', href: '/favicon.ico'}
     ]
   },
