@@ -1,7 +1,7 @@
 <template>
   <v-card>
     <nav>
-      <v-toolbar-items class="hidden-sm-and-down">
+      <v-toolbar class="hidden-sm-and-down" height="70">
 
         <router-link to="/">
           <v-img src="/logo.png"
@@ -20,7 +20,25 @@
         <StaticMenu title="درباره ما"/>
         <v-divider vertical></v-divider>
         <StaticMenu title="ارتباط با ما"/>
-      </v-toolbar-items>
+        <v-spacer></v-spacer>
+        <v-btn
+          outlined
+          color="grey darken-2"
+          style="font-family: yekan_o !important;"
+          to="/users/login-register/"
+        >
+          <v-icon>mdi-account</v-icon>
+          ورود به حساب
+
+        </v-btn>
+
+        <RouterLink to="/cart/" class="text-decoration-none">
+          <v-icon color="grey darken-1" class="ml-4 mr-4">mdi-cart-outline</v-icon>
+        </RouterLink>
+
+
+      </v-toolbar>
+
     </nav>
   </v-card>
 </template>
@@ -57,6 +75,8 @@ export default {
 }
 </script>
 
-<style scoped>
-
+<style>
+button > span {
+  font-family: yekan_o !important;
+}
 </style>

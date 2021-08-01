@@ -64,6 +64,7 @@
                   <v-rating
                     :value="data ? data.rating : 0"
                     color="amber"
+                    background-color="grey lighten-1"
                     dense
                     half-increments
                     readonly
@@ -78,7 +79,7 @@
 
             <v-row class="mt-12  mb-12">
               <v-col class="col-auto ma-auto">
-                <p justify-right>
+                <p justify-right style="line-height: 1.8">
                   {{ data ? data.brief_description : '' }}
                 </p>
               </v-col>
@@ -101,7 +102,7 @@
               <v-spacer></v-spacer>
               <v-col class="col-auto ma-auto">
                 <v-btn
-                  class="white--text"
+                  class="white--text btn_main_product"
                   color="red darken-1"
                   x-large
                   :disabled="data && data.available ? false : true"
@@ -114,9 +115,12 @@
           </v-col>
         </v-row>
         <v-row>
-          <p style="font-family: vazir_o !important;" class="ma-12" v-html="detailed_description">
+          <p class="ma-12" style="line-height: 1.8" v-html="detailed_description">
           </p>
 
+        </v-row>
+        <v-row>
+          <CardProductRelatedLList :products=" data? data.related_products : ''"/>
         </v-row>
       </v-col>
     </v-row>
@@ -126,9 +130,11 @@
 
 <script>
 import axios from "axios";
+import CardProductRelatedLList from "../../../../../components/CardProductRelatedLList";
 
 export default {
   name: "index",
+  components: {CardProductRelatedLList},
   data() {
     return {
       read_description: false,

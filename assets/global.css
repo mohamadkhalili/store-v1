@@ -10,6 +10,17 @@
   url(assets/web_fonts/vazir-font-v18.0.0/Vazir.ttf) format("truetype");
 }
 
+@font-face {
+  font-family: "yekan_o";
+  src: local("yekan-font"),
+  url(assets/web_fonts/yekan-font/Yekan.ttf) format("truetype");
+}
+
 *, div, h1, h2, h3, h4, h5, h6 {
   font-family: vazir_o !important;
+}
+
+.btn_main_product.theme--light.v-btn.v-btn--disabled.v-btn--has-bg {
+  background-color: #9a9a9a !important;
+  color: #fff !important;
 }

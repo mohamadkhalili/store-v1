@@ -63,7 +63,7 @@
           </v-chip>
           <v-spacer></v-spacer>
 
-          <div class="text-caption my-4 text-subtitle-1">
+          <div class="text-caption my-4 text-subtitle-1" style="direction: ltr !important;">
             {{ post.published_date }}
           </div>
 

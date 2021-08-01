@@ -37,6 +37,7 @@
         <v-rating
           :value="product.rating"
           color="amber"
+          background-color="grey lighten-1"
           dense
           half-increments
           readonly
@@ -71,10 +72,11 @@
     <v-card-actions>
       <v-col class="col-auto mr-auto">
         <v-btn
-          class="white--text"
+          class="white--text btn_main_product"
           color="red darken-1"
-          large
+          x-large
           :disabled="product && product.available ? false : true"
+
         >
           افزودن به سبد خرید
         </v-btn>
@@ -146,6 +148,6 @@ export default {
 }
 </script>
 
-<style scoped>
+<style>
 
 </style>
