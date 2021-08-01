@@ -4,7 +4,7 @@
 
 <script>
 export default {
-  name: "login-register"
+  name: "confirm"
 }
 </script>
 

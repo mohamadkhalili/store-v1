@@ -3,6 +3,7 @@
     <nav>
       <v-toolbar class="hidden-sm-and-down" height="70">
 
+
         <router-link to="/">
           <v-img src="/logo.png"
                  alt="Vuetify.js"
@@ -12,6 +13,7 @@
                  contain
           />
         </router-link>
+
 
         <DynamicMenu :data-prop="product_menues" name="محصولات"/>
         <v-divider vertical></v-divider>
@@ -31,6 +33,11 @@
           ورود به حساب
 
         </v-btn>
+
+        <v-divider
+          vertical
+          class="mr-2"
+        ></v-divider>
 
         <RouterLink to="/cart/" class="text-decoration-none">
           <v-icon color="grey darken-1" class="ml-4 mr-4">mdi-cart-outline</v-icon>
@@ -76,7 +83,5 @@ export default {
 </script>
 
 <style>
-button > span {
-  font-family: yekan_o !important;
-}
+
 </style>
