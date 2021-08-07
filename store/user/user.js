@@ -2,7 +2,6 @@
 import {SET_PASSWORD, SET_PHONE} from "../types/mutation-types";
 
 //action variables
-import {CHECK_PHONE} from "../types/action-types";
 
 //state
 export const state = () => ({
@@ -24,10 +23,11 @@ export const mutations = {
 
 //actions
 export const actions = {
-  async [CHECK_PHONE]({commit, state}, phone) {
+  async checkPhone({commit, state}) {
     const phone_found = await this.$axios.$post('/api/users/login/', {
-      'phone': state.user.user.phone,
-      'csrfmiddlewaretoken': this.csrfmiddlewaretoken
+      'phone': '09127761266',
+      'csrfmiddlewaretoken': this.state.csrfmiddlewaretoken
     })
+    console.log('hhhhhhhhhhhhhhhhh: ', phone_found)
   }
 }

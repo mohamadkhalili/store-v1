@@ -1,6 +1,6 @@
 <template>
   <v-form>
-    <v-container fluid pa-0>
+    <v-container fluid pa-0 sele>
       <v-row align="center" justify="center"
              style="height:100vh" dense>
         <v-col cols="12" class="fill-height d-flex flex-column justify-center align-center">
@@ -58,6 +58,7 @@
 </template>
 
 <script>
+import {mapActions} from 'vuex'
 
 export default {
   name: "login-register",
@@ -71,6 +72,7 @@ export default {
     }
   },
   mounted() {
+
     this.loading = true
     this.disabled = true
     // this.$axios.$get('URL', {progress: false})
@@ -85,17 +87,19 @@ export default {
     this.disabled = false
   },
   methods: {
+    ...mapActions('user/user', ['checkPhone']),
     submitPhone() {
       this.loading = true
       this.disabled = true
+      this.checkPhone()
 
-      this.$axios.$post('/api/users/login/', {
-        'phone': this.phonenumber,
-        'csrfmiddlewaretoken': this.csrfmiddlewaretoken
-      })
-        .then(response => {
-          console.log(response)
-        })
+      // this.$axios.$post('/api/users/login/', {
+      //   'phone': this.phonenumber,
+      //   'csrfmiddlewaretoken': this.csrfmiddlewaretoken
+      // })
+      //   .then(response => {
+      //     console.log(response)
+      //   })
       this.loading = false
       this.disabled = false
       // var xhr = new XMLHttpRequest();
