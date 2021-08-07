@@ -27,7 +27,7 @@
           outlined
           color="grey darken-2"
           style="font-family: yekan_o !important;"
-          to="/users/login-register/"
+          to="/users/login/register/"
         >
           <v-icon>mdi-account</v-icon>
           ورود به حساب
