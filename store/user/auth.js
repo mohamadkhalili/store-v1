@@ -12,23 +12,23 @@ export const state = () => ({
 
 //mutations
 export const mutations = {
-  [SET_CSRFTOKEN](state, csrf) {
-    state.csrftoken = csrf
-    document.cookie = "csrftoken=" + csrf + ";path=/"
+  [SET_CSRFTOKEN](state, payload) {
+    state.csrftoken = payload
+    document.cookie = "csrftoken=" + payload + ";path=/"
   },
-  [SET_CSFMIDDLEWARETOKEN](state, csrf) {
-    state.csrfmiddlewaretoken = csrf
+  [SET_CSFMIDDLEWARETOKEN](state, payload) {
+    state.csrfmiddlewaretoken = payload
   },
-  [SET_SESSIONID](state, id) {
-    state.sessionid = id
-    document.cookie = "sessionid=" + id + ";path=/"
+  [SET_SESSIONID](state, payload) {
+    state.sessionid = payload
+    document.cookie = "sessionid=" + payload + ";path=/"
   }
 }
 
 //actions
 export const actions = {
-  async [GET_CSF]() {
-    const response = await this.$axios.get("/api/supporter_datas/csrf")
+  async [GET_CSF]({commit}) {
+    const response = await this.$axios.$get("/api/users/login/")
     commit(SET_CSRFTOKEN, response.csrftoken)
     commit(SET_CSFMIDDLEWARETOKEN, response.csrfmiddlewaretoken)
   }

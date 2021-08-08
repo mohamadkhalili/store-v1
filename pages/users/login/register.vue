@@ -88,10 +88,13 @@ export default {
   },
   methods: {
     ...mapActions('user/user', ['checkPhone']),
+    ...mapActions('user/auth', ['GET_CSF']),
     submitPhone() {
       this.loading = true
       this.disabled = true
+
       this.checkPhone()
+      // this.GET_CSF()
 
       // this.$axios.$post('/api/users/login/', {
       //   'phone': this.phonenumber,

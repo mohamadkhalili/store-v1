@@ -1,5 +1,6 @@
 //mutation variables
 import {SET_PASSWORD, SET_PHONE} from "../types/mutation-types";
+import {GET_CSF} from "../types/action-types";
 
 //action variables
 
@@ -23,10 +24,12 @@ export const mutations = {
 
 //actions
 export const actions = {
-  async checkPhone({commit, state}) {
+  async checkPhone({dispatch, commit, state, rootState}, csrfmiddlewaretoken) {
+    await dispatch('user/auth/' + GET_CSF, '', {root: true})
+    // console.log()
     const phone_found = await this.$axios.$post('/api/users/login/', {
       'phone': '09127761266',
-      'csrfmiddlewaretoken': this.state.csrfmiddlewaretoken
+      'csrfmiddlewaretoken': rootState.user.auth.csrfmiddlewaretoken
     })
     console.log('hhhhhhhhhhhhhhhhh: ', phone_found)
   }
