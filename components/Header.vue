@@ -1,63 +1,69 @@
 <template>
-  <v-card>
-    <nav>
-      <v-toolbar class="hidden-sm-and-down" height="70">
+
+  <v-toolbar extended height="85" dense class="px-200"
+             style="transform: translateY(0px); left: 0px; right: 0px;">
 
 
-        <router-link to="/">
-          <v-img src="/logo.png"
-                 alt="Vuetify.js"
-                 class="l-1 mt-1 mr-5"
-                 height="60px"
-                 width="60px"
-                 contain
-          />
-        </router-link>
+    <nuxt-link class="d-flex align-center text-decoration-none" to="/">
+      <v-img max-width="60" src='/logo.png'></v-img>
+      <span class="title ml-3 mr-5 hidden-xs-only" style="color: #cb9238">ICTSUN</span>
+    </nuxt-link>
+    <v-spacer></v-spacer>
+    <SearchMain/>
+    <v-spacer></v-spacer>
+    <v-badge
+      bordered
+      bottom
+      overlap
+      color="#cb9238"
+      content="10"
+    >
+      <v-icon>mdi-cart-outline</v-icon>
+    </v-badge>
 
+    <v-btn
+      color="#cb9238"
+      outlined
+      class="mx-8"
+      to="/users/login/register/"
+    >ورود / ثبت نام
+      <v-icon>
+        mdi-account-circle-outline
+      </v-icon>
+    </v-btn>
+    <v-menu>
+      <v-card>
 
-        <DynamicMenu :data-prop="product_menues" name="محصولات"/>
-        <v-divider vertical></v-divider>
-        <DynamicMenu :data-prop="posts_menues" name="مطالب"/>
-        <v-divider vertical></v-divider>
-        <StaticMenu title="درباره ما"/>
-        <v-divider vertical></v-divider>
-        <StaticMenu title="ارتباط با ما"/>
-        <v-spacer></v-spacer>
-        <v-btn
-          outlined
-          color="grey darken-2"
-          style="font-family: yekan_o !important;"
-          to="/users/login/register/"
-        >
-          <v-icon>mdi-account</v-icon>
-          ورود به حساب
+      </v-card>
+    </v-menu>
+    <template
+      v-slot:extension
+      class="extension-style"
+    >
+      <v-tabs color="#cb9238" align-with-title>
+        <v-tab>Browsing History</v-tab>
+        <v-tab>Todays Deals</v-tab>
+        <v-tab>Your Store</v-tab>
+        <v-tab>Gift Cards</v-tab>
+        <v-tab>Registry</v-tab>
+        <v-tab>Sell</v-tab>
+      </v-tabs>
+    </template>
 
-        </v-btn>
-
-        <v-divider
-          vertical
-          class="mr-2"
-        ></v-divider>
-
-        <RouterLink to="/cart/" class="text-decoration-none">
-          <v-icon color="grey darken-1" class="ml-4 mr-4">mdi-cart-outline</v-icon>
-        </RouterLink>
-
-
-      </v-toolbar>
-
-    </nav>
-  </v-card>
+  </v-toolbar>
 </template>
 
 <script>
 import axios from 'axios'
 import Menu from "./DynamicMenu";
 import StaticMenu from "./StaticMenu";
+import HeaderTop from "./HeaderTop";
+import HeaderBottom from "./HeaderBottom";
+import SearchMain from "./SearchMain";
 
 export default {
   name: "Header",
-  components: {StaticMenu, Menu},
+  components: {SearchMain, HeaderBottom, HeaderTop, StaticMenu, Menu},
   data() {
     return {
       isHidden: false,
@@ -83,5 +89,8 @@ export default {
 </script>
 
 <style>
-
+.px-200 {
+  padding-left: 200px;
+  padding-right: 200px;
+}
 </style>
