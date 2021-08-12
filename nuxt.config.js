@@ -56,7 +56,7 @@ export default {
   axios: {
     proxy: true,
     baseURL: process.env.NODE_ENV !== "production"
-      ? "http://192.168.114.101:3000"
+      ? "process.env.BASE_URL"
       : "http://192.168.114.101:3000",
     proxyHeaders: true,
     credentials: true
@@ -85,6 +85,7 @@ export default {
       }
     }
   },
+
 
   // Build Configuration: https://go.nuxtjs.dev/config-build
   build: {}

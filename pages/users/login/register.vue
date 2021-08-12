@@ -37,6 +37,7 @@
               class="ma-4"
               outlined
               clearable
+              :error="phoneerror"
             ></v-text-field>
             <div class="ma-4">
               <v-btn
@@ -58,12 +59,13 @@
 </template>
 
 <script>
-import {mapActions} from 'vuex'
+import {CHECK_PHONE} from "../../../store/types/action-types";
 
 export default {
   name: "login-register",
   data() {
     return {
+      phoneerror: false,
       loading: false,
       disabled: false,
       csrfmiddlewaretoken: null,
@@ -71,44 +73,24 @@ export default {
       phonenumber: null
     }
   },
-  mounted() {
-
-    this.loading = true
-    this.disabled = true
-    // this.$axios.$get('URL', {progress: false})
-    this.$axios.$get('api/users/login/')
-      .then(response => {
-        console.log(response)
-        this.csrfmiddlewaretoken = response.csrfmiddlewaretoken
-        console.log(response.csrfmiddlewaretoken)
-        document.cookie = "csrftoken=" + response.csrftoken + ";path=/"
-      })
-    this.loading = false
-    this.disabled = false
+  computed: {
+    status_register() {
+      return this.$store.state.user.user.status_register
+    }
   },
   methods: {
-    ...mapActions('user/user', ['checkPhone']),
-    ...mapActions('user/auth', ['GET_CSF']),
-    submitPhone() {
-      this.loading = true
-      this.disabled = true
+    async submitPhone() {
+      if (this.phonenumber.length == 11) {
+        this.phoneerror = false
+        this.loading = true
+        await this.$store.dispatch('user/user/' + CHECK_PHONE, this.phonenumber)
+        this.loading = false
+        if (this.status_register)
+          this.$router.push('/users/login/confirm')
+      } else {
+        this.phoneerror = true
+      }
 
-      this.checkPhone()
-      // this.GET_CSF()
-
-      // this.$axios.$post('/api/users/login/', {
-      //   'phone': this.phonenumber,
-      //   'csrfmiddlewaretoken': this.csrfmiddlewaretoken
-      // })
-      //   .then(response => {
-      //     console.log(response)
-      //   })
-      this.loading = false
-      this.disabled = false
-      // var xhr = new XMLHttpRequest();
-      // xhr.open('POST', 'http://192.168.114.101:3000/users/login/', true);
-      // xhr.withCredentials = true;
-      // xhr.send(null);
     }
   }
 }

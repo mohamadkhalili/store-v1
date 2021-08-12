@@ -7,7 +7,6 @@ import {GET_CSF} from "../types/action-types";
 export const state = () => ({
   csrftoken: null,
   csrfmiddlewaretoken: null,
-  sessionid: null,
 })
 
 //mutations
@@ -20,7 +19,6 @@ export const mutations = {
     state.csrfmiddlewaretoken = payload
   },
   [SET_SESSIONID](state, payload) {
-    state.sessionid = payload
     document.cookie = "sessionid=" + payload + ";path=/"
   }
 }
