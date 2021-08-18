@@ -1,6 +1,5 @@
 <template>
   <v-card
-    :loading="loading"
     class="mx-auto my-12 pa-2"
     max-width="374"
     max-height="521"
@@ -25,7 +24,7 @@
     </router-link>
 
     <v-card-title style="height: 64px;max-height: 64px;flex-wrap: nowrap;overflow-x: auto;">{{
-        product.title
+        product.name
       }}
     </v-card-title>
 
@@ -76,7 +75,7 @@
           color="red darken-1"
           x-large
           :disabled="product && product.available ? false : true"
-
+          @click="add_product(product.id)"
         >
           افزودن به سبد خرید
         </v-btn>
@@ -87,6 +86,8 @@
 </template>
 
 <script>
+import {ADD_CARD} from "../store/types/action-types";
+
 export default {
   name: "CardProduct",
   data() {
@@ -105,44 +106,14 @@ export default {
       deep: true,
       handler(newV) {
         this.product = newV
-        this.price_persian = this.getPersianNumbers(this.product.price)
+        this.price_persian = this.$tofarsi(this.product.price)
       }
     },
   },
   methods: {
-    getPersianNumbers(price_number) {
-      var out = ""
-      const price_l = price_number.length
-      for (let i = 0; i < price_l; i++) {
-        let lastnumber = price_number % 10;
-        price_number = parseInt(price_number / 10)
-        if (i % 3 == 0 && i < price_l - 1 && i > 1) {
-          out = "," + out
-        }
-        if (lastnumber == 0) {
-          out = "۰" + out
-        } else if (lastnumber == 1) {
-          out = "۱" + out
-        } else if (lastnumber == 2) {
-          out = "۲" + out
-        } else if (lastnumber == 3) {
-          out = "۳" + out
-        } else if (lastnumber == 4) {
-          out = "۴" + out
-        } else if (lastnumber == 5) {
-          out = "۵" + out
-        } else if (lastnumber == 6) {
-          out = "۶" + out
-        } else if (lastnumber == 7) {
-          out = "۷" + out
-        } else if (lastnumber == 8) {
-          out = "۸" + out
-        } else if (lastnumber == 9) {
-          out = "۹" + out
-        }
-
-      }
-      return out
+    add_product(id) {
+      console.log('id: ', id)
+      this.$store.dispatch('cart/' + ADD_CARD, id)
     }
   }
 }

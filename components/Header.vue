@@ -1,6 +1,6 @@
 <template>
 
-  <v-toolbar extended height="85" dense class="px-200"
+  <v-toolbar extended height="85" dense class="px-200" max-height="133"
              style="transform: translateY(0px); left: 0px; right: 0px;">
 
 
@@ -11,79 +11,239 @@
     <v-spacer></v-spacer>
     <SearchMain/>
     <v-spacer></v-spacer>
-    <v-badge
-      bordered
-      bottom
-      overlap
-      color="#cb9238"
-      content="10"
-    >
-      <v-icon>mdi-cart-outline</v-icon>
-    </v-badge>
 
-    <v-btn
-      color="#cb9238"
-      outlined
-      class="mx-8"
-      to="/users/login/register/"
-    >ورود / ثبت نام
-      <v-icon>
-        mdi-account-circle-outline
-      </v-icon>
-    </v-btn>
-    <v-menu>
-      <v-card>
 
-      </v-card>
-    </v-menu>
+    <template v-if="user.id">
+      <v-menu
+        offset-y
+      >
+        <template v-slot:activator="{ on, attrs }">
+          <v-btn
+            color="#cb9238"
+            class="mx-8"
+            plain
+            v-bind="attrs"
+            v-on="on"
+          >
+            <v-icon size="30" color="rgba(0, 0, 0, 0.87)">
+              mdi-account-circle-outline
+            </v-icon>
+            <v-icon>
+              mdi-menu-down
+            </v-icon>
+          </v-btn>
+        </template>
+        <v-list>
+          <v-list-item to="/users/edit">
+            <v-list-item-icon>
+              <v-icon>mdi-account</v-icon>
+            </v-list-item-icon>
+            <v-list-item-title>حساب کاربری</v-list-item-title>
+          </v-list-item>
+          <v-list-item to="/users/orders">
+            <v-list-item-icon>
+              <v-icon>mdi-view-list</v-icon>
+            </v-list-item-icon>
+            <v-list-item-title>سفارش های من</v-list-item-title>
+          </v-list-item>
+          <v-list-item to="/users/logout">
+            <v-list-item-icon>
+              <v-icon color="red">mdi-exit-to-app</v-icon>
+            </v-list-item-icon>
+            <v-list-item-title>خروج</v-list-item-title>
+          </v-list-item>
+        </v-list>
+      </v-menu>
+    </template>
+    <template v-else>
+      <v-btn
+        color="#cb9238"
+        outlined
+        class="mx-8"
+        to="/users/login/register/"
+      >ورود / ثبت نام
+        <v-icon>
+          mdi-account-circle-outline
+        </v-icon>
+      </v-btn>
+    </template>
+
+
+    <template>
+      <v-menu
+        offset-y
+        open-on-hover
+        z-index="10"
+      >
+        <template v-slot:activator="{ on, attrs }">
+          <v-btn
+            v-bind="attrs"
+            v-on="on"
+            class="pa-0"
+            plain>
+            <v-badge
+              bordered
+              overlap
+              color="#cb9238"
+              :content="count"
+              v-bind="attrs"
+              v-on="on"
+            >
+              <v-icon>mdi-cart-outline</v-icon>
+            </v-badge>
+          </v-btn>
+
+
+        </template>
+        <v-list>
+
+          <v-list-item style="z-index: 10" v-for="(product,index) in products" :key="index"
+          >
+            <v-col>
+              <v-row>
+                <nuxt-link :to="product.url" class="text-decoration-none text--black">
+                  <v-list-item-title style="width: 250px" class="text--black black--text">{{
+                      product.name
+                    }}
+                  </v-list-item-title>
+                </nuxt-link>
+              </v-row>
+              <v-row class="pa-2" style="width: 100%">
+                <v-spacer></v-spacer>
+                <v-list-item-subtitle>
+                  {{ product.quantity }}
+                  <v-icon size="12">mdi-close</v-icon>
+                  {{ product.price }}تومان
+                </v-list-item-subtitle>
+              </v-row>
+            </v-col>
+            <v-spacer></v-spacer>
+            <v-list-item-action style="z-index: 10">
+              <v-badge
+                bordered
+                overlap
+                color="#ef394e"
+                v-bind="attrs"
+                v-on="on"
+              >
+                <v-icon slot="badge" style="z-index: 50" @click="removeCart(product.id)">mdi-close</v-icon>
+                <nuxt-link :to="product.url" class="text-decoration-none text--black">
+                  <v-img :src="product.image_icon.image" width="80px" height="80px" contain/>
+                </nuxt-link>
+              </v-badge>
+            </v-list-item-action>
+
+          </v-list-item>
+          <v-list-item class="mb-2">
+            <v-list-item-title>
+              جمع کل: {{ total_prices }} تومان
+            </v-list-item-title>
+            <v-spacer></v-spacer>
+            <btn-small>
+              ثبت سفارش
+            </btn-small>
+          </v-list-item>
+        </v-list>
+      </v-menu>
+    </template>
+
+
     <template
       v-slot:extension
       class="extension-style"
     >
       <v-tabs color="#cb9238" align-with-title>
-        <v-tab>Browsing History</v-tab>
-        <v-tab>Todays Deals</v-tab>
-        <v-tab>Your Store</v-tab>
-        <v-tab>Gift Cards</v-tab>
-        <v-tab>Registry</v-tab>
-        <v-tab>Sell</v-tab>
+        <template v-for="(menu, index) in menus" :id="index">
+          <template v-if="menu.root_childs && menu.root_childs[0]">
+            <v-menu
+              open-on-hover
+              offset-y
+              left
+            >
+              <template v-slot:activator="{ on, attrs }">
+                <v-tab :to="menu.url"
+                       v-bind="attrs"
+                       v-on="on"
+                       style="z-index: 2"
+                >{{ menu.name }}
+                </v-tab>
+              </template>
+              <MenuChild :menuchilds="menu.root_childs"/>
+            </v-menu>
+          </template>
+          <template v-else>
+            <v-tab :to="menu.url">{{ menu.name }}
+            </v-tab>
+          </template>
+        </template>
       </v-tabs>
     </template>
-
   </v-toolbar>
 </template>
 
 <script>
-import axios from 'axios'
-import Menu from "./DynamicMenu";
-import StaticMenu from "./StaticMenu";
-import HeaderTop from "./HeaderTop";
-import HeaderBottom from "./HeaderBottom";
 import SearchMain from "./SearchMain";
+import {DELETE_CARD, GET_CARD, GET_MENU} from "../store/types/action-types";
+import MenuChild from "./MenuChild";
+import BtnSmall from "./buttons/btnSmall";
 
 export default {
   name: "Header",
-  components: {SearchMain, HeaderBottom, HeaderTop, StaticMenu, Menu},
+  components: {BtnSmall, MenuChild, SearchMain},
   data() {
     return {
+      cart_list: null,
+      lockSelection: false,
       isHidden: false,
-      product_menues: undefined,
-      posts_menues: null,
       attrs: false,
       on: false
     }
   },
+  watch: {
+    cart_list: {
+      immediate: true,
+      deep: true,
+      handler(newV, oldV) {
+        this.cart_list = null
+      }
+    }
+  },
+  computed: {
+    user() {
+      return this.$store.state.user.user
+    },
+    menus() {
+      return this.$store.state.menu.menus
+    },
+    products() {
+      return this.$store.state.cart.products
+    },
+    count() {
+      return this.$store.state.cart.count
+    },
+    total_prices() {
+      return this.$store.state.cart.total_prices
+    },
+    getpersiannumber(number) {
+      return this.$tofarsi(number)
+    }
+  },
   mounted() {
-    axios.get("http://192.168.114.101:3000/products/roots/")
-      .then(response => {
-        this.product_menues = response.data.product_menues
-      })
-      .catch()
-    axios.get("http://192.168.114.101:3000/posts/roots/")
-      .then(response => {
-        this.posts_menues = response.data.post_menues
-      })
-      .catch()
+    this.getmenus()
+    this.getcards()
+  },
+  methods: {
+    removeCart(id) {
+      console.log('id: ', id)
+      this.$store.dispatch('cart/' + DELETE_CARD, id)
+
+    },
+    getmenus() {
+      this.$store.dispatch('menu/' + [GET_MENU])
+    },
+    async getcards() {
+      await this.$store.dispatch('cart/' + [GET_CARD])
+    }
   }
 }
 </script>

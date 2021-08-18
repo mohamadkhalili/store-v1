@@ -22,14 +22,12 @@
   </v-row>
 </template>
 <script>
-import MySlider from "../components/MySlider";
 import GridCardProduct from "../components/GridCardProduct";
-import axios from "axios";
 import ListCardPosts from "../components/ListCardPosts";
 import GridCardPost from "../components/GridCardPost";
 
 export default {
-  components: {GridCardPost, ListCardPosts, GridCardProduct, MySlider},
+  components: {GridCardPost, ListCardPosts, GridCardProduct},
   data() {
     return {
       products: null,
@@ -37,7 +35,7 @@ export default {
     }
   },
   mounted() {
-    axios.get("http://192.168.114.101:3000/")
+    this.$axios.get("/api/")
       .then(response => {
         console.log(response.data)
         this.products = response.data.products

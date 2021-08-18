@@ -51,7 +51,7 @@
             <v-row class="mb-12 mt-12">
               <v-col class="col-auto">
                 <h2>
-                  {{ data ? data.title : '' }}
+                  {{ data ? data.name : '' }}
                 </h2>
               </v-col>
               <v-spacer></v-spacer>
@@ -129,7 +129,6 @@
 </template>
 
 <script>
-import axios from "axios";
 import CardProductRelatedLList from "../../../../../components/CardProductRelatedLList";
 
 export default {
@@ -142,7 +141,7 @@ export default {
       id: this.$route.params.id,
       slug: this.$route.params.slug,
       roots: null,
-      images: null,
+      images: [],
       price_persian: "",
       available_color: "green accent-2",
       data: null,
@@ -150,7 +149,7 @@ export default {
     }
   },
   mounted() {
-    axios.get("http://192.168.114.101:3000/products/detail/" + this.id + "/" + this.slug + "/")
+    this.$axios.get("/api/products/detail/" + this.id + "/" + this.slug + "/")
       .then(response => {
         this.roots = response.data.roots
         this.data = response.data

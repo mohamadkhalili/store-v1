@@ -65,12 +65,16 @@ import {SIGNIN} from "../../../store/types/action-types";
 
 export default {
   name: "confirm",
-  middleware: 'authenticated',
   data() {
     return {
       showpass: false,
       loading: false,
       password: null
+    }
+  },
+  mounted() {
+    if (this.$store.state.user.user.phone == '') {
+      this.$router.push('/users/login/register')
     }
   },
   computed: {

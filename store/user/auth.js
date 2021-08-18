@@ -20,7 +20,7 @@ export const mutations = {
   },
   [SET_SESSIONID](state, payload) {
     document.cookie = "sessionid=" + payload + ";path=/"
-  }
+  },
 }
 
 //actions
@@ -31,3 +31,5 @@ export const actions = {
     commit(SET_CSFMIDDLEWARETOKEN, response.csrfmiddlewaretoken)
   }
 }
+
+//'supporter_datas/user

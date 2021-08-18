@@ -1,43 +1,23 @@
 <template>
   <v-sheet
-    class="mx-auto"
-    max-width="800"
+    class="ma-6"
+    max-width="100%"
   >
     <v-slide-group
-      v-model="model"
       class="pa-4"
       show-arrows
-      center-active
+      multiple
     >
       <v-slide-item
         v-for="(product, index) in products"
         :key="index"
         v-slot="{ active, toggle }"
         align="right"
-
       >
         <CardProductRelated :product="product"/>
 
       </v-slide-item>
     </v-slide-group>
-
-    <v-expand-transition>
-      <v-sheet
-        v-if="model != null"
-        height="200"
-        tile
-      >
-        <v-row
-          class="fill-height"
-          align="center"
-          justify="center"
-        >
-          <h3 class="text-h6">
-            Selected {{ model }}
-          </h3>
-        </v-row>
-      </v-sheet>
-    </v-expand-transition>
   </v-sheet>
 </template>
 
@@ -49,7 +29,6 @@ export default {
   components: {CardProductRelated},
   data() {
     return {
-      model: null,
       products: null,
     }
   },

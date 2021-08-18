@@ -1,6 +1,6 @@
-export default function ({store, redirect}) {
-  if (store.state.user.user.phone == '') {
-    console.log(store.state.user.user.phone)
-    return redirect('/users/login/register')
-  }
+import {GET_CARD, GET_USER} from "../store/types/action-types";
+
+export default function ({store}) {
+  store.dispatch('cart/' + GET_CARD)
+  store.dispatch('user/user/' + GET_USER)
 }

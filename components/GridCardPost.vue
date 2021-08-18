@@ -23,7 +23,7 @@ export default {
   components: {CardPostGridStyle},
   data() {
     return {
-      posts: null,
+      posts: [],
     }
   },
   props: {

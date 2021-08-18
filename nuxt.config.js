@@ -35,7 +35,7 @@ export default {
   ],
 
   // Plugins to run before rendering page: https://go.nuxtjs.dev/config-plugins
-  plugins: [],
+  plugins: ['~/plugins/farsiNumber.js'],
 
   // Auto import components: https://go.nuxtjs.dev/config-components
   components: true,
@@ -57,13 +57,13 @@ export default {
     proxy: true,
     baseURL: process.env.NODE_ENV !== "production"
       ? "process.env.BASE_URL"
-      : "http://192.168.114.101:3000",
+      : "http://192.168.114.21:3000",
     proxyHeaders: true,
     credentials: true
 
   },
   proxy: {
-    '/api/': {target: 'http://192.168.114.101:3000', pathRewrite: {'^/api/': ''}}
+    '/api/': {target: 'http://192.168.114.21:3000', pathRewrite: {'^/api/': ''}}
   },
 
 
@@ -85,7 +85,9 @@ export default {
       }
     }
   },
-
+  router: {
+    middleware: ['authenticated']
+  },
 
   // Build Configuration: https://go.nuxtjs.dev/config-build
   build: {}

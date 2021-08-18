@@ -1,6 +1,5 @@
 <template>
   <v-card
-    :loading="loading"
     class="mx-auto my-12 pa-2"
     max-width="374"
     max-height="521"
@@ -26,7 +25,7 @@
 
     <router-link
       :to="post.root.url" class="text-decoration-none">
-      <h6 pill :to="post.root.url" class=" black--text ms-4 mt-3 text-decoration-none "
+      <h6 pill class=" black--text ms-4 mt-3 text-decoration-none "
 
           style="color: #e51a2d !important;font-family: tanha !important;"
           :color="available_color">
@@ -58,7 +57,7 @@
           align="center"
           class="mx-0"
         >
-          <v-chip v-on="on" pill :to="post.root.url" class="black--text" color="available_color">
+          <v-chip v-on="on" pill :to="post.author.url" class="black--text" color="available_color">
             {{ post.author.name }}
           </v-chip>
           <v-spacer></v-spacer>
