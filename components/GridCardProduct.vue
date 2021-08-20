@@ -22,23 +22,9 @@ import CardProduct from "./CardProduct";
 export default {
   name: "GridCardProduct",
   components: {CardProduct},
-  data() {
-    return {
-      products: [],
-    }
-  },
   props: {
-    products: Object
-  },
-  watch: {
-    products: {
-      immediate: true,
-      deep: true,
-      handler(newV) {
-        this.products = newV
-      }
-    },
-  },
+    products: Array
+  }
 }
 </script>
 

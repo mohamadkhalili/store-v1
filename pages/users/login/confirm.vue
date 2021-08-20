@@ -39,6 +39,7 @@
               class="ma-4"
               outlined
               clearable
+              @keypress.enter="submitlogin"
               @click:append="showpass = !showpass"
             ></v-text-field>
             <div class="ma-4">
@@ -83,8 +84,10 @@ export default {
     }
   },
   methods: {
-    submitlogin() {
-      this.$store.dispatch('user/user/' + SIGNIN, this.password)
+    async submitlogin(event) {
+      event.preventDefault()
+      await this.$store.dispatch('user/user/' + SIGNIN, this.password)
+      this.$router.push('/')
     }
   }
 }

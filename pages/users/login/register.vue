@@ -38,6 +38,7 @@
               outlined
               clearable
               :error="phoneerror"
+              @keypress.enter="submitPhone"
             ></v-text-field>
             <div class="ma-4">
               <v-btn
@@ -73,13 +74,25 @@ export default {
       phonenumber: null
     }
   },
+  beforeCreate() {
+    if (this.$store.state.user.user.id != null) {
+      this.$router.push('/')
+    }
+  },
   computed: {
     status_register() {
       return this.$store.state.user.user.status_register
     }
-  },
+    ,
+    id_user() {
+      return this.$store.state.user.user.id
+    }
+  }
+  ,
   methods: {
-    async submitPhone() {
+    async submitPhone(event) {
+      event.preventDefault()
+
       if (this.phonenumber.length == 11) {
         this.phoneerror = false
         this.loading = true

@@ -17,7 +17,7 @@ export default {
     }
   },
   props: {
-    menuchilds: String
+    menuchilds: Array
   },
   watch: {
     menuchilds: {

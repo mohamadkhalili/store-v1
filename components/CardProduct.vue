@@ -92,7 +92,6 @@ export default {
   name: "CardProduct",
   data() {
     return {
-      product: null,
       available_color: "green accent-2",
       price_persian: ""
     }
@@ -105,14 +104,12 @@ export default {
       immediate: true,
       deep: true,
       handler(newV) {
-        this.product = newV
         this.price_persian = this.$tofarsi(this.product.price)
       }
     },
   },
   methods: {
     add_product(id) {
-      console.log('id: ', id)
       this.$store.dispatch('cart/' + ADD_CARD, id)
     }
   }

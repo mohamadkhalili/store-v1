@@ -1,6 +1,6 @@
 <template>
 
-  <v-toolbar extended height="85" dense class="px-200" max-height="133"
+  <v-toolbar extended height="85" dense class="px-2" max-height="133"
              style="transform: translateY(0px); left: 0px; right: 0px;">
 
 
@@ -82,9 +82,10 @@
             class="pa-0"
             plain>
             <v-badge
+
               bordered
               overlap
-              color="#cb9238"
+              :color="'#cb9238'"
               :content="count"
               v-bind="attrs"
               v-on="on"
@@ -95,14 +96,15 @@
 
 
         </template>
-        <v-list>
+        <v-list v-if="count_number>0">
 
           <v-list-item style="z-index: 10" v-for="(product,index) in products" :key="index"
           >
             <v-col>
               <v-row>
                 <nuxt-link :to="product.url" class="text-decoration-none text--black">
-                  <v-list-item-title style="width: 250px" class="text--black black--text">{{
+                  <v-list-item-title style="width: 250px" class="text--black black--text">
+                    {{
                       product.name
                     }}
                   </v-list-item-title>
@@ -221,6 +223,9 @@ export default {
     count() {
       return this.$store.state.cart.count
     },
+    count_number() {
+      return this.$store.state.cart.count_number
+    },
     total_prices() {
       return this.$store.state.cart.total_prices
     },
@@ -249,8 +254,18 @@ export default {
 </script>
 
 <style>
-.px-200 {
-  padding-left: 200px;
-  padding-right: 200px;
+@media (max-width: 19200px) {
+  .px-200 {
+    padding-left: 200px;
+    padding-right: 200px;
+  }
 }
+
+@media (max-width: 19200px) {
+  .px-200 {
+    padding-left: 200px;
+    padding-right: 200px;
+  }
+}
+
 </style>

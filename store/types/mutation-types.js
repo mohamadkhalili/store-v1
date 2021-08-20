@@ -16,3 +16,9 @@ export const SET_MENU = 'SET_MENU'
 
 //=> /cart.js
 export const SET_CARD = 'SET_CARD'
+
+
+//=> /product/list.js
+export const SET_PRODUCTS = 'SET_PRODUCTS'
+export const CLEAR_PRODUCTS = 'CLEAR_PRODUCTS'
+
