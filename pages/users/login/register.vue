@@ -61,9 +61,11 @@
 
 <script>
 import {CHECK_PHONE} from "../../../store/types/action-types";
+import redirectLogedIn from "../../../middleware/redirectLogedIn";
 
 export default {
   name: "login-register",
+  middleware: ['redirectLogedIn'],
   data() {
     return {
       phoneerror: false,

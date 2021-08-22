@@ -20,6 +20,7 @@ export const state = () => ({
   is_superuser: false,
   last_login: '',
   phone: '',
+  phone_show: '',
 })
 
 //mutations
@@ -32,15 +33,16 @@ export const mutations = {
   },
   [SET_USER_LOGIN](state, user) {
     state.id = user ? user.id : null
-    state.address = user ? user.address : ''
-    state.date_joined = user ? user.date_joined : null
+    state.address = user ? this.$tofarsinonum(user.address) : ''
+    state.date_joined = user ? this.$tofarsinonum(user.date_joined) : null
     state.email = user ? user.email : ''
     state.first_name = user ? user.first_name : ''
     state.last_name = user ? user.last_name : ''
     state.is_active = user ? user.is_active : false
     state.is_staff = user ? user.is_staff : false
     state.is_superuser = user ? user.is_superuser : false
-    state.last_login = user ? user.last_login : null
+    state.last_login = user ? this.$tofarsinonum(user.last_login) : null
+    state.phone_show = user ? this.$tofarsinonum(user.phone) : null
   }
 }
 
