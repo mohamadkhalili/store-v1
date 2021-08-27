@@ -29,6 +29,7 @@ export default {
     ]
   },
 
+
   // Global CSS: https://go.nuxtjs.dev/config-css
   css: [
     "~/assets/global.css",
@@ -43,7 +44,7 @@ export default {
   // Modules for dev and build (recommended): https://go.nuxtjs.dev/config-modules
   buildModules: [
     // https://go.nuxtjs.dev/vuetify
-    ['@nuxtjs/vuetify', {rtl: true}],
+    ['@nuxtjs/vuetify', {rtl: true,}],
   ],
 
   // Modules: https://go.nuxtjs.dev/config-modules
@@ -70,6 +71,7 @@ export default {
   // Vuetify module configuration: https://go.nuxtjs.dev/config-vuetify
   vuetify: {
     customVariables: ['~/assets/variables.scss'],
+
     theme: {
       light: true,
       themes: {

@@ -1,16 +1,26 @@
 //mutation variables
-import {SET_PHONE, SET_SESSIONID, SET_STATUS_REGISTER, SET_USER_LOGIN} from "../types/mutation-types";
+import {
+  SET_AFTER_EDIT_INFORMATION,
+  SET_LOADING_USER,
+  SET_PHONE,
+  SET_SESSIONID,
+  SET_STATUS_REGISTER,
+  SET_USER_LOGIN
+} from "../types/mutation-types";
 //action variables
-import {CHECK_PHONE, GET_CSF, GET_USER, SIGNIN, SIGNOUT} from "../types/action-types";
+import {CHECK_PHONE, EDIT_USER_INFORMATION, GET_CSF, GET_USER, SIGNIN, SIGNOUT} from "../types/action-types";
 
 
 //state
 export const state = () => ({
+  loading: false,
   status_register: false, //if phone registered equal true //status register
   status_signin: false,
   status_signup: false,
-  address: [],
+  address: '',
+  address_view: '',
   date_joined: '',
+  date_joined_view: '',
   email: '',
   first_name: '',
   last_name: '',
@@ -19,8 +29,24 @@ export const state = () => ({
   is_staff: false,
   is_superuser: false,
   last_login: '',
+  last_login_view: '',
   phone: '',
-  phone_show: '',
+  phone_view: '',
+  postal_code: '',
+  postal_code_view: '',
+  job: '',
+  national_code: '',
+  national_code_view: '',
+  error: {
+    phone: null,
+    email: null,
+    national_code: null,
+    postal_code: null,
+    job: null,
+    address: null,
+    first_name: null,
+    last_name: null
+  },
 })
 
 //mutations
@@ -33,16 +59,75 @@ export const mutations = {
   },
   [SET_USER_LOGIN](state, user) {
     state.id = user ? user.id : null
-    state.address = user ? this.$tofarsinonum(user.address) : ''
-    state.date_joined = user ? this.$tofarsinonum(user.date_joined) : null
+    state.address = user ? user.address : ''
+    state.address_view = user ? this.$tofarsinonum(user.address) : ''
+    state.date_joined = user ? user.date_joined : null
+    state.date_joined_view = user ? this.$tofarsinonum(user.date_joined) : null
     state.email = user ? user.email : ''
     state.first_name = user ? user.first_name : ''
     state.last_name = user ? user.last_name : ''
     state.is_active = user ? user.is_active : false
     state.is_staff = user ? user.is_staff : false
     state.is_superuser = user ? user.is_superuser : false
-    state.last_login = user ? this.$tofarsinonum(user.last_login) : null
-    state.phone_show = user ? this.$tofarsinonum(user.phone) : null
+    state.job = user ? user.job : false
+    state.last_login = user ? user.last_login : null
+    state.last_login_view = user ? this.$tofarsinonum(user.last_login) : null
+    state.national_code = user ? user.national_code : null
+    state.national_code_view = user ? this.$tofarsinonum(user.national_code) : null
+    state.postal_code = user ? user.postal_code : null
+    state.postal_code_view = user ? this.$tofarsinonum(user.postal_code) : null
+    state.phone = user ? user.phone : null
+    state.phone_view = user ? this.$tofarsinonum(user.phone) : null
+  },
+  [SET_LOADING_USER](state, loading) {
+    state.loading = loading
+  },
+  [SET_AFTER_EDIT_INFORMATION](state, response) {
+    if (response.phone) {
+      state.phone = response ? response.phone : null
+      state.phone_view = response ? this.$tofarsinonum(response.phone) : null
+      state.error.phone = null
+    } else if (response.first_name && response.last_name) {
+      state.first_name = response ? response.first_name : ''
+      state.last_name = response ? response.last_name : ''
+      state.error.first_name = null
+      state.error.last_name = null
+    } else if (response.email) {
+      state.phone = response ? response.email : null
+      state.error.email = null
+    } else if (response.national_code) {
+      state.phone = response ? response.national_code : null
+      state.phone_view = response ? this.$tofarsinonum(response.national_code) : null
+      state.error.national_code = null
+    } else if (response.postal_code) {
+      state.phone = response ? response.postal_code : null
+      state.phone_view = response ? this.$tofarsinonum(response.postal_code) : null
+      state.error.postal_code = null
+    } else if (response.job) {
+      state.phone = response ? response.job : null
+      state.error.job = null
+    } else if (response.address) {
+      state.phone = response ? response.address : null
+      state.error.address = null
+    } else if (response.error) {
+      if (response.error.phone) {
+        state.error.phone = response.error.phone
+      } else if (response.error.first_name) {
+        state.error.first_name = response.error.first_name
+      } else if (response.error.last_name) {
+        state.error.last_name = response.error.last_name
+      } else if (response.error.email) {
+        state.error.email = response.error.email
+      } else if (response.error.national_code) {
+        state.error.national_code = response.error.national_code
+      } else if (response.error.postal_code) {
+        state.error.postal_code = response.error.postal_code
+      } else if (response.error.job) {
+        state.error.job = response.error.job
+      } else if (response.error.address) {
+        state.error.address = response.error.address
+      }
+    }
   }
 }
 
@@ -75,5 +160,16 @@ export const actions = {
   async [GET_USER]({commit}) {
     const response = await this.$axios.get('/api/supporter_datas/user/')
     commit(SET_USER_LOGIN, response.data.user)
+  },
+  async [EDIT_USER_INFORMATION]({commit, dispatch}, object) {
+    commit(SET_LOADING_USER, true)
+    try {
+      const request = await this.$axios.put('/api/users/userchange/', object)
+      console.log('userchange: ', request)
+      commit(SET_AFTER_EDIT_INFORMATION, request.data)
+      commit(SET_LOADING_USER, false)
+    } catch (e) {
+      commit(SET_LOADING_USER, false)
+    }
   }
 }

@@ -2,6 +2,7 @@
   <v-btn
     class="white--text btn_main_product"
     color="red darken-1"
+    @click="click"
   >
     <slot/>
   </v-btn>
@@ -9,7 +10,12 @@
 
 <script>
 export default {
-  name: "btnSmall"
+  name: "btnSmall",
+  methods: {
+    click() {
+      this.$emit("click");
+    }
+  },
 }
 </script>
 

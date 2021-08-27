@@ -3,6 +3,7 @@ export const CHECK_PHONE = 'CHECK_PHONE'
 export const SIGNIN = 'SIGNIN'
 export const SIGNOUT = 'SIGNOUT'
 export const SIGNUP = 'SIGNUP'
+export const EDIT_USER_INFORMATION = 'EDIT_USER_INFORMATION'
 
 
 //=> /user/auth.js

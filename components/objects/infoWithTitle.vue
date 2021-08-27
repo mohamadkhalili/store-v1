@@ -17,7 +17,7 @@
         text
         icon
         color="red lighten-2"
-        @click="edit"
+        @click="click"
       >
         <v-icon style="color: #515151;">mdi-pencil</v-icon>
       </v-btn>
@@ -28,11 +28,6 @@
 <script>
 export default {
   name: "infoWithTitle",
-  methods: {
-    clickp(e) {
-      console.log('hji')
-    }
-  },
   props: {
     direction: {
       type: String,
@@ -40,10 +35,7 @@ export default {
     },
     title: String,
     value: String,
-    edit: {
-      type: Function,
-      required: true,
-    },
+    click: Function
   }
 }
 </script>

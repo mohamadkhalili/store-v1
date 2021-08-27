@@ -20,6 +20,9 @@
   },
   "devDependencies": {
     "@mdi/font": "^5.9.55",
-    "@nuxtjs/vuetify": "^1.12.1"
+    "@nuxtjs/style-resources": "^1.2.1",
+    "@nuxtjs/vuetify": "^1.12.1",
+    "node-sass": "^6.0.1",
+    "sass-loader": "^12.1.0"
   }
 }

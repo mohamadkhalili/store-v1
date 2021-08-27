@@ -2,6 +2,8 @@
 export const SET_PHONE = 'SET_PHONE'
 export const SET_STATUS_REGISTER = 'SET_STATUS_REGISTER'
 export const SET_USER_LOGIN = 'SET_USER_LOGIN'
+export const SET_LOADING_USER = 'SET_LOADING_USER'
+export const SET_AFTER_EDIT_INFORMATION = 'SET_AFTER_EDIT_INFORMATION'
 
 
 //=> /user/auth.js
