@@ -143,22 +143,27 @@
     </v-col>
     <v-col cols="6">
       <v-card height="400px">
-        <v-row style="height: 50% !important;" no-gutters>
-          <v-col cols="6">
+        <v-list>
+          <v-divider></v-divider>
+          <v-list-item>
+            <list-item-order1
+              :data="{'id_persian':'ردیف', 'created_persian':'تاریخ ثبت', 'price_persian': 'مبلغ کل', 'paid_type':'وضعیت','details':'جزئیات'}"></list-item-order1>
 
-          </v-col>
-          <v-col cols="6">
+          </v-list-item>
+          <v-divider></v-divider>
+          <template v-for="(order, index) in orders" v-if="index < 3">
+            <v-list-item>
+              <list-item-order1 :data="order"></list-item-order1>
 
-          </v-col>
-        </v-row>
-        <v-row style="height: 50% !important;" no-gutters>
-          <v-col cols="6">
+            </v-list-item>
+            <v-divider></v-divider>
+          </template>
 
+        </v-list>
+        <nuxt-link to="to" class="text-decoration-none">
+          <v-col class="pa-1 d-block justify-center text-center align-self-center black--text">مشاهده لسیت سفارش ها
           </v-col>
-          <v-col cols="6">
-
-          </v-col>
-        </v-row>
+        </nuxt-link>
       </v-card>
     </v-col>
   </v-row>
@@ -169,7 +174,8 @@ import InfoWithTitle from "../../components/objects/infoWithTitle";
 import EditTwoTextField from "../../components/forms/editTwoTextField";
 import EditOneTextField from "../../components/forms/editOneTextField";
 import EditOneTextarea from "../../components/forms/editOneTextarea";
-import {EDIT_USER_INFORMATION} from "../../store/types/action-types";
+import {EDIT_USER_INFORMATION, GET_ORDERS} from "../../store/types/action-types";
+import ListItemOrder1 from "~/components/objects/ListItemOrder1";
 
 export default {
   name: "profile",
@@ -177,7 +183,8 @@ export default {
     EditOneTextarea,
     EditTwoTextField,
     EditOneTextField,
-    InfoWithTitle
+    InfoWithTitle,
+    ListItemOrder1
   },
   data() {
     return {
@@ -272,6 +279,9 @@ export default {
     }
   },
   computed: {
+    orders() {
+      return this.$store.state.user.orders.orders
+    },
     first_name() {
       return this.$store.state.user.user.first_name
     },
@@ -313,7 +323,12 @@ export default {
     },
     error() {
       return this.$store.state.user.user.error
+
     }
+  },
+  mounted() {
+    this.$store.dispatch('user/orders/' + GET_ORDERS)
+    console.log(this.orders)
   }
 }
 </script>

@@ -24,3 +24,7 @@ export const SET_CARD = 'SET_CARD'
 export const SET_PRODUCTS = 'SET_PRODUCTS'
 export const CLEAR_PRODUCTS = 'CLEAR_PRODUCTS'
 
+//=> user/orders.js
+export const SET_ORDERS = 'GET_ORDERS'
+
+

@@ -12,17 +12,14 @@
     "@nuxtjs/axios": "^5.13.6",
     "core-js": "^3.15.1",
     "cors": "^2.8.5",
-    "iransans": "^1.0.0",
     "nuxt": "^2.15.7",
-    "typeface-iranyekan": "0.0.11",
-    "vazir-font": "^29.1.0",
-    "vuetify": "^2.5.5"
+    "vuetify": "^2.5.8"
   },
   "devDependencies": {
     "@mdi/font": "^5.9.55",
     "@nuxtjs/style-resources": "^1.2.1",
     "@nuxtjs/vuetify": "^1.12.1",
     "node-sass": "^6.0.1",
-    "sass-loader": "^12.1.0"
+    "sass-loader": "^10.1.1"
   }
 }

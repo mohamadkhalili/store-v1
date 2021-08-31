@@ -22,3 +22,7 @@ export const ADD_CARD = 'ADD_CARD'
 
 //=> product/list.js
 export const GET_PRODUCTS = 'GET_PRODUCTS'
+
+
+//=> user/orders.js
+export const GET_ORDERS = 'SET_ORDERS'
