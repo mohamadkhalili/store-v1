@@ -143,24 +143,24 @@
     </v-col>
     <v-col cols="6">
       <v-card height="400px">
-        <v-list>
-          <v-divider></v-divider>
-          <v-list-item>
+        <v-list class="pt-0 pt-0">
+          <v-list-item style="background-color: #85b3be;">
             <list-item-order1
-              :data="{'id_persian':'ردیف', 'created_persian':'تاریخ ثبت', 'price_persian': 'مبلغ کل', 'paid_type':'وضعیت','details':'جزئیات'}"></list-item-order1>
+              :data="{'index':'ردیف', 'created_persian':'تاریخ ثبت', 'price_persian': 'مبلغ کل', 'order_status':'وضعیت','details':'جزئیات'}"
+              color="#fff"></list-item-order1>
 
           </v-list-item>
           <v-divider></v-divider>
           <template v-for="(order, index) in orders" v-if="index < 3">
-            <v-list-item>
-              <list-item-order1 :data="order"></list-item-order1>
+            <v-list-item :style="(index % 2) != 1 ? 'background-color: #fbfbfb;' : 'background-color: #fff;'">
+              <list-item-order1 :data="order" color="#535353"></list-item-order1>
 
             </v-list-item>
             <v-divider></v-divider>
           </template>
 
         </v-list>
-        <nuxt-link to="to" class="text-decoration-none">
+        <nuxt-link to="orders" class="text-decoration-none">
           <v-col class="pa-1 d-block justify-center text-center align-self-center black--text">مشاهده لسیت سفارش ها
           </v-col>
         </nuxt-link>

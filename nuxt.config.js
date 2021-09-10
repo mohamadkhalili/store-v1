@@ -57,7 +57,7 @@ export default {
   axios: {
     proxy: true,
     baseURL: process.env.NODE_ENV !== "production"
-      ? "process.env.BASE_URL"
+      ? process.env.BASE_URL
       : "http://192.168.114.21:3000",
     proxyHeaders: true,
     credentials: true

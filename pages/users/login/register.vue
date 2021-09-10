@@ -62,6 +62,7 @@
 <script>
 import {CHECK_PHONE} from "../../../store/types/action-types";
 import redirectLogedIn from "../../../middleware/redirectLogedIn";
+import {SET_PHONE} from "@/store/types/mutation-types";
 
 export default {
   name: "login-register",
@@ -100,8 +101,11 @@ export default {
         this.loading = true
         await this.$store.dispatch('user/user/' + CHECK_PHONE, this.phonenumber)
         this.loading = false
-        if (this.status_register)
+        if (this.status_register) {
+          console.log(this.phonenumber)
+          this.$store.commit('user/user/' + SET_PHONE, this.phonenumber)
           this.$router.push('/users/login/confirm')
+        }
       } else {
         this.phoneerror = true
       }

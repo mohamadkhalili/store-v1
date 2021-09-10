@@ -5,7 +5,6 @@
       <h5 class="text-center align-center align-content-center d-flex pa-2">
         مرتب کردن بر اساس
       </h5>
-
       <v-select
         v-model="select"
         :items="items"

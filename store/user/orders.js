@@ -9,6 +9,8 @@ export const state = () => ({
 
 export const mutations = {
   [SET_ORDERS](state, orders) {
+    let index = 1
+    state.orders = []
     orders.orders.forEach((order) => {
       if (order) {
         state.orders.push({
@@ -20,8 +22,10 @@ export const mutations = {
           'items': order.items,
           'paid_type': order.paid_type,
           'price': order.price,
+          'order_status': order.order_status,
           'price_persian': this.$tofarsi(order.price),
-          'profile_order': order.profile_order
+          'profile_order': order.profile_order,
+          'index': this.$tofarsinonum((index++).toString())
         })
       }
     })

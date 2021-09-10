@@ -51,8 +51,8 @@ export const state = () => ({
 
 //mutations
 export const mutations = {
-  [SET_PHONE](state, text) {
-    state.phone = text
+  [SET_PHONE](state, phone) {
+    state.phone = phone
   },
   [SET_STATUS_REGISTER](state, status) {
     state.status_register = status
@@ -76,7 +76,7 @@ export const mutations = {
     state.national_code_view = user ? this.$tofarsinonum(user.national_code) : null
     state.postal_code = user ? user.postal_code : null
     state.postal_code_view = user ? this.$tofarsinonum(user.postal_code) : null
-    state.phone = user ? user.phone : null
+    // state.phone = user ? user.phone : null
     state.phone_view = user ? this.$tofarsinonum(user.phone) : null
   },
   [SET_LOADING_USER](state, loading) {
@@ -134,12 +134,13 @@ export const mutations = {
 //actions
 export const actions = {
   async [CHECK_PHONE]({dispatch, commit, rootState, state}, phone) {
-    commit(SET_PHONE, phone)
+
     await dispatch('user/auth/' + GET_CSF, '', {root: true})
     const respons = await this.$axios.$post('/api/users/login/', {
       'phone': phone,
       'csrfmiddlewaretoken': rootState.user.auth.csrfmiddlewaretoken
     })
+    commit(SET_PHONE, phone)
     commit(SET_STATUS_REGISTER, respons.phone_found)
   },
   async [SIGNIN]({dispatch, commit, rootState, state}, password) {
