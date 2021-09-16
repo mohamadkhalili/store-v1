@@ -60,9 +60,9 @@ export const mutations = {
   [SET_USER_LOGIN](state, user) {
     state.id = user ? user.id : null
     state.address = user ? user.address : ''
-    state.address_view = user ? this.$tofarsinonum(user.address) : ''
+    state.address_view = user ? (user.address) : ''
     state.date_joined = user ? user.date_joined : null
-    state.date_joined_view = user ? this.$tofarsinonum(user.date_joined) : null
+    state.date_joined_view = user ? (user.date_joined) : null
     state.email = user ? user.email : ''
     state.first_name = user ? user.first_name : ''
     state.last_name = user ? user.last_name : ''
@@ -71,13 +71,13 @@ export const mutations = {
     state.is_superuser = user ? user.is_superuser : false
     state.job = user ? user.job : false
     state.last_login = user ? user.last_login : null
-    state.last_login_view = user ? this.$tofarsinonum(user.last_login) : null
+    state.last_login_view = user ? (user.last_login) : null
     state.national_code = user ? user.national_code : null
-    state.national_code_view = user ? this.$tofarsinonum(user.national_code) : null
+    state.national_code_view = user ? (user.national_code) : null
     state.postal_code = user ? user.postal_code : null
-    state.postal_code_view = user ? this.$tofarsinonum(user.postal_code) : null
+    state.postal_code_view = user ? (user.postal_code) : null
     // state.phone = user ? user.phone : null
-    state.phone_view = user ? this.$tofarsinonum(user.phone) : null
+    state.phone_view = user ? (user.phone) : null
   },
   [SET_LOADING_USER](state, loading) {
     state.loading = loading
@@ -85,7 +85,7 @@ export const mutations = {
   [SET_AFTER_EDIT_INFORMATION](state, response) {
     if (response.phone) {
       state.phone = response ? response.phone : null
-      state.phone_view = response ? this.$tofarsinonum(response.phone) : null
+      state.phone_view = response ? (response.phone) : null
       state.error.phone = null
     } else if (response.first_name && response.last_name) {
       state.first_name = response ? response.first_name : ''
@@ -97,11 +97,11 @@ export const mutations = {
       state.error.email = null
     } else if (response.national_code) {
       state.phone = response ? response.national_code : null
-      state.phone_view = response ? this.$tofarsinonum(response.national_code) : null
+      state.phone_view = response ? (response.national_code) : null
       state.error.national_code = null
     } else if (response.postal_code) {
       state.phone = response ? response.postal_code : null
-      state.phone_view = response ? this.$tofarsinonum(response.postal_code) : null
+      state.phone_view = response ? (response.postal_code) : null
       state.error.postal_code = null
     } else if (response.job) {
       state.phone = response ? response.job : null

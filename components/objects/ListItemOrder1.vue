@@ -8,14 +8,14 @@
       inset
     ></v-divider>
     <v-col cols="3" class="text-center align-self-center" :style="'color: '+color">
-      {{ data.created_persian }}
+      {{ data.created }}
     </v-col>
     <v-divider
       vertical
       inset
     ></v-divider>
     <v-col cols="3" class="text-center align-self-center" :style="'color: '+color">
-      {{ data.price_persian }}
+      {{ data.price_como }}
       <template v-if="!data.details">تومان</template>
     </v-col>
     <v-divider
@@ -37,7 +37,7 @@
       </template>
       <template v-else>
         <nuxt-link style="display:grid;height: 100% !important;" class="text-decoration-none"
-                   :to="data.profile_order ? data.profile_order.url : null">
+                   :to="'/users/orders/'+data.id">
           <v-icon :style="'color: '+color">mdi-dots-horizontal</v-icon>
         </nuxt-link>
       </template>

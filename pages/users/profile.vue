@@ -146,7 +146,7 @@
         <v-list class="pt-0 pt-0">
           <v-list-item style="background-color: #85b3be;">
             <list-item-order1
-              :data="{'index':'ردیف', 'created_persian':'تاریخ ثبت', 'price_persian': 'مبلغ کل', 'order_status':'وضعیت','details':'جزئیات'}"
+              :data="{'index':'ردیف', 'created':'تاریخ ثبت', 'price_como': 'مبلغ کل', 'order_status':'وضعیت','details':'جزئیات'}"
               color="#fff"></list-item-order1>
 
           </v-list-item>

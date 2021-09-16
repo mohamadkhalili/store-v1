@@ -230,7 +230,7 @@ export default {
       return this.$store.state.cart.total_prices
     },
     getpersiannumber(number) {
-      return this.$tofarsi(number)
+      return this.$tocomonum(number)
     }
   },
   mounted() {

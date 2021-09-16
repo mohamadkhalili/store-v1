@@ -5,10 +5,10 @@
         <v-card class="pa-3 mt-10" style="width: 100%;max-width: 100%;min-width: 100%">
           <v-row>
             <v-col class="pe-2" style="max-width: 100px">
-              {{ order.created_persian }}
+              {{ order.created }}
             </v-col>
             <v-col class="pe-2" style="max-width: 70px">
-              {{ order.id_persian }}
+              {{ order.id }}
             </v-col>
             <v-col class="pe-2" style="max-width: 150px">
               {{ order.order_status }}
@@ -16,7 +16,7 @@
             <v-spacer></v-spacer>
             <v-col class="pe-6 text-left" style="max-width: 250px">
               <nuxt-link :to="'orders/'+order.id" class="text-decoration-none">
-                <p class="text-subtitle-1" style="color: #00bfd6">مشاهده سفارش ></p>
+                <p class="text-subtitle-1" style="color: #00bfd6;font-family: vazir_digit !important">مشاهده سفارش ></p>
               </nuxt-link>
             </v-col>
           </v-row>
@@ -24,7 +24,7 @@
             <v-col class="pt-0">
               <p>
                 <span class="grey--text">مبلغ کل: </span>
-                <span>{{ order.price_persian }} تومان</span>
+                <span>{{ order.price_como }} تومان</span>
               </p>
             </v-col>
           </v-row>

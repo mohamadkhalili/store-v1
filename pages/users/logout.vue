@@ -1,5 +1,5 @@
 <template>
-  <v-btn @click="clear"></v-btn>
+  <h1>در حال خروج</h1>
 </template>
 
 <script>

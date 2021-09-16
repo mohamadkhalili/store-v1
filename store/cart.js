@@ -15,14 +15,14 @@ export const mutations = {
     state.products = data.sabad
 
     data.sabad.forEach((value, index) => {
-      state.products[index].price = this.$tofarsi(value.price)
-      state.products[index].quantity = this.$tofarsi(value.quantity.toString())
+      state.products[index].price = this.$tocomonum(value.price)
+      state.products[index].quantity = this.$tocomonum(value.quantity.toString())
       state.products[index].quantity_number = value.quantity
-      state.products[index].total_price = this.$tofarsi(value.total_price)
+      state.products[index].total_price = this.$tocomonum(value.total_price)
     })
-    state.count = this.$tofarsi(data.products_count.toString())
+    state.count = this.$tocomonum(data.products_count.toString())
     state.count_number = data.products_count
-    state.total_prices = this.$tofarsi(data.total_prices)
+    state.total_prices = this.$tocomonum(data.total_prices)
   }
 }
 
@@ -39,6 +39,5 @@ export const actions = {
   async [ADD_CARD]({commit, dispatch}, id) {
     await this.$axios.post('/api/cart/add/', {'product_id': id})
     dispatch(GET_CARD)
-    console.log(response)
   }
 }

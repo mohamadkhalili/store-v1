@@ -104,7 +104,7 @@ export default {
       immediate: true,
       deep: true,
       handler(newV) {
-        this.price_persian = this.$tofarsi(this.product.price)
+        this.price_persian = this.$tocomonum(this.product.price)
       }
     },
   },

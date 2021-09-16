@@ -16,16 +16,14 @@ export const mutations = {
         state.orders.push({
           'cd_peigiry': order.cd_peigiry,
           'created': order.created,
-          'created_persian': this.$tofarsinonum(order.created),
           'id': order.id,
-          'id_persian': this.$tofarsinonum(order.id.toString()),
           'items': order.items,
           'paid_type': order.paid_type,
           'price': order.price,
           'order_status': order.order_status,
-          'price_persian': this.$tofarsi(order.price),
+          'price_como': this.$tocomonum(order.price),
           'profile_order': order.profile_order,
-          'index': this.$tofarsinonum((index++).toString())
+          'index': ((index++).toString())
         })
       }
     })
