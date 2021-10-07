@@ -1,13 +1,60 @@
 <template>
-
+  <v-card>
+    <quantity-selector max="10" min="0"></quantity-selector>
+    <div style="height: 800px" id="my-map"></div>
+  </v-card>
 </template>
 
 <script>
+import QuantitySelector from "@/components/objects/QuantitySelector";
+import maplibregl from 'maplibre-gl'
+
 export default {
-  name: "cart"
+  components: {QuantitySelector},
+  name: "cart",
+  data() {
+    return {
+      API_KEY: '0a93a6162ea74d65abde42bd434dcc62',
+      lng: null,
+      lat: null,
+    }
+  },
+  async mounted() {
+    await this.$axios.get("https://api.geoapify.com/v1/ipinfo?apiKey=0a93a6162ea74d65abde42bd434dcc62").then(req => {
+      this.lat = req.data.location.latitude
+      this.lng = req.data.location.longitude
+    })
+    const v1 = new maplibregl.LngLat(this.lng, this.lat);
+    const map = new maplibregl.Map({
+      container: 'my-map',
+      style: `https://maps.geoapify.com/v1/styles/osm-carto/style.json?&ip=${this.ip}&apiKey=${this.API_KEY}`,
+      zoom: 8,
+      center: v1
+    });
+
+
+    map.on('click', this.onMapClick)
+  },
+  methods: {
+    onMapClick(e) {
+      console.log(e)
+      const reverseGeocodingUrl = `https://api.geoapify.com/v2/place-details?lat=${e.lngLat.lat}&lon=${e.lngLat.lng}&apiKey=${this.API_KEY}`;
+
+      // call Reverse Geocoding API - https://www.geoapify.com/reverse-geocoding-api/
+      this.$axios.get(reverseGeocodingUrl).then(result => {
+        console.log(result);
+      });
+    }
+  }
 }
 </script>
 
-<style scoped>
+<style>
+#my_iframe .mapboxgl-ctrl {
+  opacity: 0 !important;
+}
 
+.mapboxgl-ctrl * {
+  opacity: 0 !important;
+}
 </style>

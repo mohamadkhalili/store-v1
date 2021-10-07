@@ -141,7 +141,7 @@
               جمع کل: {{ total_prices }} تومان
             </v-list-item-title>
             <v-spacer></v-spacer>
-            <btn-small>
+            <btn-small to="/cart">
               ثبت سفارش
             </btn-small>
           </v-list-item>
