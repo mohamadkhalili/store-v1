@@ -18,6 +18,7 @@ export const GET_MENU = 'GET_MENU'
 export const GET_CARD = 'GET_CARD'
 export const DELETE_CARD = 'DELETE_CARD'
 export const ADD_CARD = 'ADD_CARD'
+export const MINUS_CARD = 'MINUS_CARD'
 
 
 //=> product/list.js
