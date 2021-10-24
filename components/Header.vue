@@ -57,7 +57,7 @@
     </template>
     <template v-else>
       <v-btn
-        color="#cb9238"
+        color="secondary"
         outlined
         class="mx-8"
         to="/users/login/register/"
@@ -85,7 +85,7 @@
 
               bordered
               overlap
-              :color="'#cb9238'"
+              color="secondary"
               :content="count"
               v-bind="attrs"
               v-on="on"
@@ -154,31 +154,40 @@
       v-slot:extension
       class="extension-style"
     >
-      <v-tabs color="#cb9238" align-with-title>
-        <template v-for="(menu, index) in menus" :id="index">
-          <template v-if="menu.root_childs && menu.root_childs[0]">
-            <v-menu
-              open-on-hover
-              offset-y
-              left
-            >
-              <template v-slot:activator="{ on, attrs }">
-                <v-tab :to="menu.url"
-                       v-bind="attrs"
-                       v-on="on"
-                       style="z-index: 2"
-                >{{ menu.name }}
-                </v-tab>
-              </template>
-              <MenuChild :menuchilds="menu.root_childs"/>
-            </v-menu>
+      <v-row>
+        <v-col>
+          <v-tabs color="primary" align-with-title>
+          <template v-for="(menu, index) in menus" :id="index">
+            <template v-if="menu.root_childs && menu.root_childs[0]">
+              <v-menu
+                open-on-hover
+                offset-y
+                left
+              >
+                <template v-slot:activator="{ on, attrs }">
+                  <v-tab :to="menu.url"
+                         v-bind="attrs"
+                         v-on="on"
+                         style="z-index: 2"
+                  >{{ menu.name }}
+                  </v-tab>
+                </template>
+                <MenuChild :menuchilds="menu.root_childs"/>
+              </v-menu>
+            </template>
+            <template v-else>
+              <v-tab :to="menu.url">{{ menu.name }}
+              </v-tab>
+            </template>
           </template>
-          <template v-else>
-            <v-tab :to="menu.url">{{ menu.name }}
-            </v-tab>
-          </template>
-        </template>
-      </v-tabs>
+        </v-tabs>
+        </v-col>
+
+          <toggle-light-dark class="align-self-center ml-4"
+            v-model="$vuetify.theme.dark"
+          />
+
+      </v-row>
     </template>
   </v-toolbar>
 </template>
@@ -188,10 +197,11 @@ import SearchMain from "./SearchMain";
 import {DELETE_CARD, GET_CARD, GET_MENU} from "../store/types/action-types";
 import MenuChild from "./MenuChild";
 import BtnSmall from "./buttons/btnSmall";
+import ToggleLightDark from "./buttons/ToggleLightDark";
 
 export default {
   name: "Header",
-  components: {BtnSmall, MenuChild, SearchMain},
+  components: {ToggleLightDark, BtnSmall, MenuChild, SearchMain},
   data() {
     return {
       cart_list: null,

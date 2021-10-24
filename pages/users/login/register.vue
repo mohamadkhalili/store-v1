@@ -4,7 +4,6 @@
       <v-row align="center" justify="center"
              style="height:100vh" dense>
         <v-col cols="12" class="fill-height d-flex flex-column justify-center align-center">
-
           <v-card
             elevation="2"
             outlined
@@ -86,10 +85,6 @@ export default {
     status_register() {
       return this.$store.state.user.user.status_register
     }
-    ,
-    id_user() {
-      return this.$store.state.user.user.id
-    }
   }
   ,
   methods: {
@@ -102,9 +97,9 @@ export default {
         await this.$store.dispatch('user/user/' + CHECK_PHONE, this.phonenumber)
         this.loading = false
         if (this.status_register) {
-          console.log(this.phonenumber)
           this.$store.commit('user/user/' + SET_PHONE, this.phonenumber)
           this.$router.push('/users/login/confirm')
+
         }
       } else {
         this.phoneerror = true

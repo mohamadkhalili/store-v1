@@ -18,9 +18,7 @@ export const state = () => ({
   status_signin: false,
   status_signup: false,
   address: '',
-  address_view: '',
   date_joined: '',
-  date_joined_view: '',
   email: '',
   first_name: '',
   last_name: '',
@@ -29,14 +27,10 @@ export const state = () => ({
   is_staff: false,
   is_superuser: false,
   last_login: '',
-  last_login_view: '',
   phone: '',
-  phone_view: '',
   postal_code: '',
-  postal_code_view: '',
   job: '',
   national_code: '',
-  national_code_view: '',
   error: {
     phone: null,
     email: null,
@@ -60,9 +54,7 @@ export const mutations = {
   [SET_USER_LOGIN](state, user) {
     state.id = user ? user.id : null
     state.address = user ? user.address : ''
-    state.address_view = user ? (user.address) : ''
     state.date_joined = user ? user.date_joined : null
-    state.date_joined_view = user ? (user.date_joined) : null
     state.email = user ? user.email : ''
     state.first_name = user ? user.first_name : ''
     state.last_name = user ? user.last_name : ''
@@ -71,13 +63,9 @@ export const mutations = {
     state.is_superuser = user ? user.is_superuser : false
     state.job = user ? user.job : false
     state.last_login = user ? user.last_login : null
-    state.last_login_view = user ? (user.last_login) : null
     state.national_code = user ? user.national_code : null
-    state.national_code_view = user ? (user.national_code) : null
     state.postal_code = user ? user.postal_code : null
-    state.postal_code_view = user ? (user.postal_code) : null
-    // state.phone = user ? user.phone : null
-    state.phone_view = user ? (user.phone) : null
+    state.phone = user ? (user.phone) : null
   },
   [SET_LOADING_USER](state, loading) {
     state.loading = loading
@@ -85,7 +73,6 @@ export const mutations = {
   [SET_AFTER_EDIT_INFORMATION](state, response) {
     if (response.phone) {
       state.phone = response ? response.phone : null
-      state.phone_view = response ? (response.phone) : null
       state.error.phone = null
     } else if (response.first_name && response.last_name) {
       state.first_name = response ? response.first_name : ''
@@ -93,21 +80,19 @@ export const mutations = {
       state.error.first_name = null
       state.error.last_name = null
     } else if (response.email) {
-      state.phone = response ? response.email : null
+      state.email = response ? response.email : null
       state.error.email = null
     } else if (response.national_code) {
-      state.phone = response ? response.national_code : null
-      state.phone_view = response ? (response.national_code) : null
+      state.national_code = response ? response.national_code : null
       state.error.national_code = null
     } else if (response.postal_code) {
-      state.phone = response ? response.postal_code : null
-      state.phone_view = response ? (response.postal_code) : null
+      state.postal_code = response ? response.postal_code : null
       state.error.postal_code = null
     } else if (response.job) {
-      state.phone = response ? response.job : null
+      state.job = response ? response.job : null
       state.error.job = null
     } else if (response.address) {
-      state.phone = response ? response.address : null
+      state.address = response ? response.address : null
       state.error.address = null
     } else if (response.error) {
       if (response.error.phone) {
@@ -141,6 +126,7 @@ export const actions = {
       'csrfmiddlewaretoken': rootState.user.auth.csrfmiddlewaretoken
     })
     commit(SET_PHONE, phone)
+    console.log('gg',phone)
     commit(SET_STATUS_REGISTER, respons.phone_found)
   },
   async [SIGNIN]({dispatch, commit, rootState, state}, password) {

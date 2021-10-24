@@ -1,9 +1,11 @@
 //state
-import {GET_ORDERS} from "../types/action-types";
+import {GET_DELETE_ADDRESS, GET_EDIT_ADDRESS, GET_ORDER, GET_ORDERS, GET_PRICE_SEND} from "../types/action-types";
 import {SET_ORDERS} from "~/store/types/mutation-types";
+import {SET_ORDER} from "../types/mutation-types";
 
 export const state = () => ({
-  orders: []
+  orders: [],
+  addresses: [],
 })
 
 
@@ -27,13 +29,35 @@ export const mutations = {
         })
       }
     })
+  },
+  [SET_ORDER](state, order) {
+    state.addresses = order.profileorders
   }
 }
 
 export const actions = {
   async [GET_ORDERS]({commit}) {
-    const response = await this.$axios.get('/api/orders/orderitems/')
-    commit(SET_ORDERS, response.data)
+    try {
+      const response = await this.$axios.get('/api/orders/orderitems/')
+      commit(SET_ORDERS, response.data)
+    } catch (e) {
+    }
+  },
+  async [GET_ORDER]({commit}) {
+    const response = await this.$axios.get('/api/orders/')
+    commit(SET_ORDER, response.data)
+  },
+  async [GET_PRICE_SEND]({commit}, idAddress) {
+    const response = await this.$axios.get('/api/orders/', idAddress + '/')
+    commit(SET_ORDER, response.data)
+  },
+  async [GET_EDIT_ADDRESS]({commit}, payload) {
+    const response = await this.$axios.put('/api/orders/', payload.idAddress + '/', payload.item)
+    commit(SET_ORDER, response.data)
+  },
+  async [GET_DELETE_ADDRESS]({commit}, idAddress) {
+    const response = await this.$axios.delete('/api/orders/', idAddress + '/')
+    commit(SET_ORDER, response.data)
   }
 }
 

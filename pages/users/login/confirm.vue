@@ -73,7 +73,15 @@ export default {
       password: null
     }
   },
+  beforeCreate() {
+            console.log('lel',this.$store.state.user.user.phone)
+
+  },
+  created() {
+
+  },
   mounted() {
+    console.log('ll',this.$store.state.user.user.phone)
     if (this.$store.state.user.user.phone == '') {
       this.$router.push('/users/login/register')
     }

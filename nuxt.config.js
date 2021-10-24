@@ -76,13 +76,31 @@ export default {
       light: true,
       themes: {
         dark: {
-          primary: colors.blue.darken2,
-          accent: colors.grey.darken3,
-          secondary: colors.amber.darken3,
+          background1: colors.grey.darken4,
+          yellow: colors.yellow.darken1,
+          primary: colors.amber.darken1,
+          accent: colors.grey.lighten3,
+          secondary: colors.blueGrey.lighten1,
           info: colors.teal.lighten1,
           warning: colors.amber.base,
           error: colors.deepOrange.accent4,
-          success: colors.green.accent3
+          success: colors.green.accent3,
+          edit: colors.blue.lighten3,
+          delete: colors.orange.darken3,
+
+        },
+        light: {
+          background1: colors.grey.lighten5,
+          yellow: colors.yellow.lighten1,
+          primary: colors.amber.lighten1,
+          accent: colors.grey.darken3,
+          secondary: colors.blueGrey.darken1,
+          info: colors.teal.darken1,
+          warning: colors.amber.base,
+          error: colors.deepOrange.accent4,
+          success: colors.green.accent3,
+          edit: colors.blue.lighten3,
+          delete: colors.orange.darken3
         }
       }
     }
