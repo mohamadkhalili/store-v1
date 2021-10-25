@@ -1,65 +1,78 @@
 <template>
-  <v-form>
-    <v-container fluid pa-0 sele>
-      <v-row align="center" justify="center"
-             style="height:100vh" dense>
-        <v-col cols="12" class="fill-height d-flex flex-column justify-center align-center">
-          <v-card
-            elevation="2"
+  <v-container fluid pa-0 sele>
+    <v-row align="center" justify="center"
+           style="min-height:calc(100vh - 150px);" dense>
+      <v-col cols="12" class="fill-height d-flex flex-column justify-center align-center">
+        <v-card
+          elevation="2"
+          outlined
+          width="400px"
+          :loading="loading"
+          :disabled="disabled"
+        >
+          <div class=" ma-auto mt-3"
+               style="max-width: 100px">
+            <router-link to="/"
+            >
+              <v-img src="/logo.png"
+                     alt="Vuetify.js"
+                     class="l-1"
+                     height="100"
+                     width="100"
+                     contain
+              />
+            </router-link>
+          </div>
+          <v-card-title class="mt-1">
+            ورود / ثبت نام
+          </v-card-title>
+          <v-card-subtitle class="mt-1">
+            شماره تلفن همراه و رمز عبور خود را وارد کنید
+          </v-card-subtitle>
+          <v-text-field
+            v-model="phonenumber"
+            label="شماره همراه"
+            class="ma-4"
             outlined
-            width="400px"
-            :loading="loading"
-            :disabled="disabled"
-          >
-            <div class=" ma-auto mt-3"
-                 style="max-width: 100px">
-              <router-link to="/"
-              >
-                <v-img src="/logo.png"
-                       alt="Vuetify.js"
-                       class="l-1"
-                       height="100"
-                       width="100"
-                       contain
-                />
-              </router-link>
-            </div>
-            <v-card-title class="mt-1">
-              ورود / ثبت نام
-            </v-card-title>
-            <v-card-subtitle class="mt-1">
-              شماره تلفن همراه خود را وارد کنید
-            </v-card-subtitle>
-            <v-text-field
-              v-model="phonenumber"
-              label="شماره همراه"
-              class="ma-4"
-              outlined
-              clearable
-              :error="phoneerror"
-              @keypress.enter="submitPhone"
-            ></v-text-field>
-            <div class="ma-4">
-              <v-btn
-                block
-                color="red darken-1"
-                elevation="2"
-                x-large
-                class="white--text text-h6"
-                @click="submitPhone"
-              >
-                ورود به سایت
-              </v-btn>
-            </div>
-          </v-card>
-        </v-col>
-      </v-row>
-    </v-container>
-  </v-form>
+            clearable
+            hide-details
+            :error="phoneerror"
+            @keypress.enter="chagePass"
+          ></v-text-field>
+          <v-text-field
+            ref="passelement"
+            v-model="password"
+            :append-icon="showpass ? 'mdi-eye' : 'mdi-eye-off'"
+            :type="showpass ? 'text' : 'password'"
+            label="رمز عبور"
+            class="ma-4"
+            outlined
+            hide-details
+            clearable
+            :error="passerror"
+            @keypress.enter="submitPhone"
+            @click:append="showpass = !showpass"
+          ></v-text-field>
+          <div class="ma-4">
+            <v-btn
+              block
+              color="secondary"
+              elevation="2"
+              x-large
+              class="white--text text-h6"
+              @click="submitPhone"
+            >
+              ورود به سایت
+            </v-btn>
+          </div>
+        </v-card>
+      </v-col>
+    </v-row>
+  </v-container>
 </template>
 
 <script>
-import {CHECK_PHONE} from "../../../store/types/action-types";
+import {CHECK_PHONE, SIGNIN} from "../../../store/types/action-types";
 import redirectLogedIn from "../../../middleware/redirectLogedIn";
 import {SET_PHONE} from "@/store/types/mutation-types";
 
@@ -73,7 +86,9 @@ export default {
       disabled: false,
       csrfmiddlewaretoken: null,
       csrftoken: null,
-      phonenumber: null
+      phonenumber: null,
+      password: null,
+      showpass: false
     }
   },
   beforeCreate() {
@@ -88,19 +103,17 @@ export default {
   }
   ,
   methods: {
+    chagePass(){
+          this.$refs.passelement.focus()
+
+    },
     async submitPhone(event) {
       event.preventDefault()
-
-      if (this.phonenumber.length == 11) {
+      if (this.phonenumber && this.phonenumber.length == 11) {
         this.phoneerror = false
         this.loading = true
-        await this.$store.dispatch('user/user/' + CHECK_PHONE, this.phonenumber)
+        await this.$store.dispatch('user/user/' + SIGNIN, {phone:this.phonenumber,password:this.password})
         this.loading = false
-        if (this.status_register) {
-          this.$store.commit('user/user/' + SET_PHONE, this.phonenumber)
-          this.$router.push('/users/login/confirm')
-
-        }
       } else {
         this.phoneerror = true
       }

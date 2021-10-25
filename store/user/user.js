@@ -126,20 +126,22 @@ export const actions = {
       'csrfmiddlewaretoken': rootState.user.auth.csrfmiddlewaretoken
     })
     commit(SET_PHONE, phone)
-    console.log('gg',phone)
+    console.log('gg', phone)
     commit(SET_STATUS_REGISTER, respons.phone_found)
   },
-  async [SIGNIN]({dispatch, commit, rootState, state}, password) {
-    await dispatch('user/auth/' + GET_CSF, '', {root: true})
-    const response = await this.$axios.$post('/api/users/login/', {
-      'phone': state.phone,
-      'password': password,
-      'csrfmiddlewaretoken': rootState.user.auth.csrfmiddlewaretoken
-    })
-    commit(SET_USER_LOGIN, response.user)
-    console.log(response)
-    commit('user/auth/' + SET_SESSIONID, response.sessionid, {root: true})
-    console.log(response)
+  async [SIGNIN]({dispatch, commit, rootState, state}, payload) {
+    try {
+      const response = await this.$axios.$post('/api/users/login/', {
+        'phone': payload.phone,
+        'password': payload.password,
+      })
+      commit(SET_USER_LOGIN, response.user)
+      commit('user/auth/' + SET_SESSIONID, response.sessionid, {root: true})
+      await this.$router.push('/')
+    } catch (e) {
+
+    }
+
   },
   async [SIGNOUT]() {
     await this.$axios.get('/api/users/logout/')
