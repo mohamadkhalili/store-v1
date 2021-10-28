@@ -36,7 +36,6 @@
             outlined
             clearable
             hide-details
-            :error="phoneerror"
             @keypress.enter="chagePass"
           ></v-text-field>
           <v-text-field
@@ -49,10 +48,12 @@
             outlined
             hide-details
             clearable
-            :error="passerror"
             @keypress.enter="submitPhone"
             @click:append="showpass = !showpass"
           ></v-text-field>
+          <v-card-subtitle class="mt-1">
+            {{ errorPhonePass ? 'شماره تلفن و ر مز عبور اشنباه می باشد.' : '' }}
+          </v-card-subtitle>
           <div class="ma-4">
             <v-btn
               block
@@ -75,13 +76,13 @@
 import {CHECK_PHONE, SIGNIN} from "../../../store/types/action-types";
 import redirectLogedIn from "../../../middleware/redirectLogedIn";
 import {SET_PHONE} from "@/store/types/mutation-types";
+import {SET_ERROR_PHONE_PASS} from "../../../store/types/mutation-types";
 
 export default {
   name: "login-register",
   middleware: ['redirectLogedIn'],
   data() {
     return {
-      phoneerror: false,
       loading: false,
       disabled: false,
       csrfmiddlewaretoken: null,
@@ -96,27 +97,28 @@ export default {
       this.$router.push('/')
     }
   },
+  mounted() {
+    this.$store.commit('user/user/' + SET_ERROR_PHONE_PASS, false)
+  },
   computed: {
     status_register() {
       return this.$store.state.user.user.status_register
+    },
+    errorPhonePass() {
+      return this.$store.state.user.user.errorPhonePass
     }
   }
   ,
   methods: {
-    chagePass(){
-          this.$refs.passelement.focus()
+    chagePass() {
+      this.$refs.passelement.focus()
 
     },
     async submitPhone(event) {
       event.preventDefault()
-      if (this.phonenumber && this.phonenumber.length == 11) {
-        this.phoneerror = false
         this.loading = true
-        await this.$store.dispatch('user/user/' + SIGNIN, {phone:this.phonenumber,password:this.password})
+        await this.$store.dispatch('user/user/' + SIGNIN, {phone: this.phonenumber, password: this.password})
         this.loading = false
-      } else {
-        this.phoneerror = true
-      }
 
     }
   }

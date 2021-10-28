@@ -31,5 +31,3 @@ export const actions = {
     commit(SET_CSFMIDDLEWARETOKEN, response.csrfmiddlewaretoken)
   }
 }
-
-//'supporter_datas/user

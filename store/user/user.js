@@ -1,6 +1,6 @@
 //mutation variables
 import {
-  SET_AFTER_EDIT_INFORMATION,
+  SET_AFTER_EDIT_INFORMATION, SET_ERROR_PHONE_PASS,
   SET_LOADING_USER,
   SET_PHONE,
   SET_SESSIONID,
@@ -22,6 +22,7 @@ export const state = () => ({
   email: '',
   first_name: '',
   last_name: '',
+  errorPhonePass: false,
   id: null,
   is_active: false,
   is_staff: false,
@@ -113,6 +114,9 @@ export const mutations = {
         state.error.address = response.error.address
       }
     }
+  },
+  [SET_ERROR_PHONE_PASS](state, status) {
+    state.errorPhonePass = status
   }
 }
 
@@ -137,9 +141,12 @@ export const actions = {
       })
       commit(SET_USER_LOGIN, response.user)
       commit('user/auth/' + SET_SESSIONID, response.sessionid, {root: true})
-      await this.$router.push('/')
+      if (response && response.sessionid)
+        await this.$router.push('/')
+      else
+        commit(SET_ERROR_PHONE_PASS, true)
     } catch (e) {
-
+      commit(SET_ERROR_PHONE_PASS, true)
     }
 
   },
