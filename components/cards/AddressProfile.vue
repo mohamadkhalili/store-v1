@@ -3,8 +3,8 @@
     <v-card class="pa-2" v-if="address" height="100%">
       <v-col>
       <v-row class="pa-2">
-          <v-icon color="primary" class="ma-2">mdi-pen</v-icon>
-          <v-icon color="error" class="ma-2">mdi-delete</v-icon>
+          <v-icon color="edit" class="ma-2" @click="edit">mdi-pen</v-icon>
+          <v-icon color="delete" class="ma-2" @click="remove">mdi-delete</v-icon>
       </v-row>
       </v-col>
       <v-col>
@@ -24,13 +24,37 @@
         {{ address.address }}
       </v-col>
     </v-card>
+    <v-dialog
+      v-model="addressDialog"
+      width="500"
+    >
+            <address-edit-form/>
+    </v-dialog>
+
   </v-col>
 </template>
 
 <script>
+import {GET_DELETE_ADDRESS} from "../../store/types/action-types";
+import AddressEditForm from "../pages/orders/AddressEditDialog";
+
 export default {
   name: "AddressProfile",
-  props: ["address"]
+  components: {AddressEditForm},
+  props: ["address"],
+  data() {
+    return{
+      addressDialog: false
+    }
+  },
+  methods: {
+    edit(){
+      this.addressDialog = true
+    },
+    remove(){
+      this.$store.dispatch('user/orders/'+GET_DELETE_ADDRESS,this.address.id)
+    }
+  }
 }
 </script>
 

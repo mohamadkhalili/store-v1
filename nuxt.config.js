@@ -18,21 +18,20 @@ export default {
       lang: 'en'
     },
     meta: [
-      {charset: 'utf-8'},
-      {name: 'viewport', content: 'width=device-width, initial-scale=1'},
-      {hid: 'description', name: 'description', content: ''},
-      {name: 'format-detection', content: 'telephone=no'}
+      { charset: 'utf-8' },
+      { name: 'viewport', content: 'width=device-width, initial-scale=1' },
+      { hid: 'description', name: 'description', content: '' },
+      { name: 'format-detection', content: 'telephone=no' }
     ],
     link: [
-      {rel: 'stylesheet', href: 'assets/web_fonts/tanha-font-v0.9/Tanha.ttf'},
-      {rel: 'icon', type: 'image/x-icon', href: '/favicon.ico'}
+      { rel: 'stylesheet', href: 'assets/web_fonts/tanha-font-v0.9/Tanha.ttf' },
+      { rel: 'icon', type: 'image/x-icon', href: '/favicon.ico' }
     ]
   },
 
-
   // Global CSS: https://go.nuxtjs.dev/config-css
   css: [
-    "~/assets/global.css",
+    '~/assets/global.css'
   ],
 
   // Plugins to run before rendering page: https://go.nuxtjs.dev/config-plugins
@@ -44,29 +43,29 @@ export default {
   // Modules for dev and build (recommended): https://go.nuxtjs.dev/config-modules
   buildModules: [
     // https://go.nuxtjs.dev/vuetify
-    ['@nuxtjs/vuetify', {rtl: true,}],
+    ['@nuxtjs/vuetify', { rtl: true }],
+    '@nuxtjs/eslint-module'
   ],
 
   // Modules: https://go.nuxtjs.dev/config-modules
   modules: [
     // https://go.nuxtjs.dev/axios
-    '@nuxtjs/axios',
+    '@nuxtjs/axios'
   ],
 
   // Axios module configuration: https://go.nuxtjs.dev/config-axios
   axios: {
     proxy: true,
-    baseURL: process.env.NODE_ENV !== "production"
+    baseURL: process.env.NODE_ENV !== 'production'
       ? process.env.BASE_URL
-      : "http://192.168.114.21:3000",
+      : 'http://192.168.114.21:3000',
     proxyHeaders: true,
     credentials: true
 
   },
   proxy: {
-    '/api/': {target: 'http://192.168.114.21:3000', pathRewrite: {'^/api/': ''}}
+    '/api/': { target: 'http://192.168.114.21:3000', pathRewrite: { '^/api/': '' } }
   },
-
 
   // Vuetify module configuration: https://go.nuxtjs.dev/config-vuetify
   vuetify: {
@@ -86,7 +85,7 @@ export default {
           error: colors.deepOrange.accent4,
           success: colors.green.accent3,
           edit: colors.blue.lighten3,
-          delete: colors.orange.darken3,
+          delete: colors.orange.darken3
 
         },
         light: {

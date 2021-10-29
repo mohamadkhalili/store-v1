@@ -11,12 +11,12 @@
       <v-col class="pe-2" style="max-width: 120px">
         جزئیات سفارش
       </v-col>
-      <v-spacer></v-spacer>
+      <v-spacer />
       <v-col class="pe-2" style="max-width: 100px">
         {{ order && order.created }}
       </v-col>
     </v-row>
-    <v-divider class="ma-4"></v-divider>
+    <v-divider class="ma-4" />
     <v-row class="px-2">
       <v-col class="pe-2">
         <span>نام تحویل گیرنده: </span>
@@ -36,7 +36,7 @@
         تومان
       </v-col>
     </v-row>
-    <v-divider class="mt-4 mb-4 pb-4"></v-divider>
+    <v-divider class="mt-4 mb-4 pb-4" />
     <v-row class="px-2 pt-0">
       <v-col class="pe-2 pt-0" style="max-width: 230px">
         <span>زمان تحویل: </span>
@@ -53,11 +53,11 @@
       v-if="order"
     >
       <template v-for="(item,i) in order.items">
-        <v-col class="pa-0 ma-0">
-          <v-divider class="mt-4 mb-4 pb-4 mr-4 ml-4"></v-divider>
+        <v-col :key="i" class="pa-0 ma-0">
+          <v-divider class="mt-4 mb-4 pb-4 mr-4 ml-4" />
           <v-row class="px-2 pt-0">
             <nuxt-link class="ma-4" :to="item.product.url">
-              <v-img width="140px" height="140px" contain :src="item.product.image_icon.image"></v-img>
+              <v-img width="140px" height="140px" contain :src="item.product.image_icon.image" />
             </nuxt-link>
             <v-col>
               <v-row>
@@ -70,7 +70,7 @@
                   <span>تعداد: </span>
                   {{ item.quantity }}
                 </v-col>
-                <v-spacer></v-spacer>
+                <v-spacer />
                 <v-col class="mt-8 pe-2 pt-0 ml-6 text-left">
                   <span>قیمت واحد: </span>
                   {{ item.price_como }}
@@ -81,35 +81,34 @@
         </v-col>
       </template>
     </template>
-    <v-divider class="mt-4 mb-4 pb-4"></v-divider>
+    <v-divider class="mt-4 mb-4 pb-4" />
   </v-card>
 </template>
 
 <script>
-import {GET_ORDERS} from "@/store/types/action-types";
+import { GET_ORDERS } from '@/store/types/action-types'
 
 export default {
-  name: "index",
-  data() {
+  name: 'Index',
+  data () {
     return {
       id: this.$route.params.id,
       order: null
     }
   },
-  async mounted() {
+  computed: {},
+  async mounted () {
     await this.$store.dispatch('user/orders/' + GET_ORDERS)
     const orders = this.$store.state.user.orders.orders
-    orders.forEach(order => {
-      if (order.id == this.id) {
+    orders.forEach((order) => {
+      if (order.id === this.id) {
         this.order = order
         this.order.items.forEach((item, index) => {
           this.order.items[index].price_como = this.$tocomonum(item.price)
         })
       }
     })
-    console.log(this.order)
-  },
-  computed: {}
+  }
 }
 </script>
 

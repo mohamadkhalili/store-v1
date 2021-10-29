@@ -1,19 +1,19 @@
 <template>
   <v-col>
     <template v-for="(product,i) in products">
-      <card-cart :key="i" :product="product"/>
+      <card-cart :key="i" :product="product" />
     </template>
   </v-col>
 </template>
 
 <script>
-import CardCart from "@/components/cards/CardCart";
+import CardCart from '@/components/cards/CardCart'
 
 export default {
-  name: "cart",
-  components: {CardCart},
+  name: 'Cart',
+  components: { CardCart },
   computed: {
-    products() {
+    products () {
       return this.$store.state.cart.products
     }
   }
