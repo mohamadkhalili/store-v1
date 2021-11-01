@@ -1,7 +1,7 @@
 <template>
   <v-row no-gutters>
     <v-col
-      v-for="(post, index) in posts"
+      v-for="(post, index) in data"
       :key="index"
       cols="12"
       xs="12"
@@ -10,34 +10,37 @@
       lg="3"
       xl="3"
     >
-      <CardPostGridStyle :post="post"/>
+      <CardPostGridStyle :post="post" />
     </v-col>
   </v-row>
 </template>
 
 <script>
-import CardPostGridStyle from "./CardPostGridStyle";
+import CardPostGridStyle from './CardPostGridStyle'
 
 export default {
-  name: "GridCardPost",
-  components: {CardPostGridStyle},
-  data() {
-    return {
-      posts: [],
+  name: 'GridCardPost',
+  components: { CardPostGridStyle },
+  props: {
+    posts: {
+      default: null,
+      type: Object
     }
   },
-  props: {
-    posts: Object
+  data () {
+    return {
+      data: []
+    }
   },
   watch: {
     posts: {
       immediate: true,
       deep: true,
-      handler(newV) {
-        this.posts = newV
+      handler (newV) {
+        this.data = newV
       }
-    },
-  },
+    }
+  }
 }
 </script>
 

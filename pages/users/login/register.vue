@@ -1,7 +1,11 @@
 <template>
   <v-container fluid pa-0 sele>
-    <v-row align="center" justify="center"
-           style="min-height:calc(100vh - 150px);" dense>
+    <v-row
+      align="center"
+      justify="center"
+      style="min-height:calc(100vh - 150px);"
+      dense
+    >
       <v-col cols="12" class="fill-height d-flex flex-column justify-center align-center">
         <v-card
           elevation="2"
@@ -10,16 +14,20 @@
           :loading="loading"
           :disabled="disabled"
         >
-          <div class=" ma-auto mt-3"
-               style="max-width: 100px">
-            <router-link to="/"
+          <div
+            class=" ma-auto mt-3"
+            style="max-width: 100px"
+          >
+            <router-link
+              to="/"
             >
-              <v-img src="/logo.png"
-                     alt="Vuetify.js"
-                     class="l-1"
-                     height="100"
-                     width="100"
-                     contain
+              <v-img
+                src="/logo.png"
+                alt="Vuetify.js"
+                class="l-1"
+                height="100"
+                width="100"
+                contain
               />
             </router-link>
           </div>
@@ -37,7 +45,7 @@
             clearable
             hide-details
             @keypress.enter="chagePass"
-          ></v-text-field>
+          />
           <v-text-field
             ref="passelement"
             v-model="password"
@@ -50,7 +58,7 @@
             clearable
             @keypress.enter="submitPhone"
             @click:append="showpass = !showpass"
-          ></v-text-field>
+          />
           <v-card-subtitle class="mt-1">
             {{ errorPhonePass ? 'شماره تلفن و ر مز عبور اشنباه می باشد.' : '' }}
           </v-card-subtitle>
@@ -73,15 +81,15 @@
 </template>
 
 <script>
-import {CHECK_PHONE, SIGNIN} from "../../../store/types/action-types";
-import redirectLogedIn from "../../../middleware/redirectLogedIn";
-import {SET_PHONE} from "@/store/types/mutation-types";
-import {SET_ERROR_PHONE_PASS} from "../../../store/types/mutation-types";
+import { SIGNIN } from '../../../store/types/action-types'
+// eslint-disable-next-line no-unused-vars
+import redirectLogedIn from '../../../middleware/redirectLogedIn'
+import { SET_ERROR_PHONE_PASS } from '../../../store/types/mutation-types'
 
 export default {
-  name: "login-register",
+  name: 'LoginRegister',
   middleware: ['redirectLogedIn'],
-  data() {
+  data () {
     return {
       loading: false,
       disabled: false,
@@ -92,34 +100,31 @@ export default {
       showpass: false
     }
   },
-  beforeCreate() {
+  computed: {
+    status_register () {
+      return this.$store.state.user.user.status_register
+    },
+    errorPhonePass () {
+      return this.$store.state.user.user.errorPhonePass
+    }
+  },
+  beforeCreate () {
     if (this.$store.state.user.user.id != null) {
       this.$router.push('/')
     }
   },
-  mounted() {
+  mounted () {
     this.$store.commit('user/user/' + SET_ERROR_PHONE_PASS, false)
   },
-  computed: {
-    status_register() {
-      return this.$store.state.user.user.status_register
-    },
-    errorPhonePass() {
-      return this.$store.state.user.user.errorPhonePass
-    }
-  }
-  ,
   methods: {
-    chagePass() {
+    chagePass () {
       this.$refs.passelement.focus()
-
     },
-    async submitPhone(event) {
+    async submitPhone (event) {
       event.preventDefault()
-        this.loading = true
-        await this.$store.dispatch('user/user/' + SIGNIN, {phone: this.phonenumber, password: this.password})
-        this.loading = false
-
+      this.loading = true
+      await this.$store.dispatch('user/user/' + SIGNIN, { phone: this.phonenumber, password: this.password })
+      this.loading = false
     }
   }
 }

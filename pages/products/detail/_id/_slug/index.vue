@@ -1,5 +1,4 @@
 <template>
-
   <v-card class="mt-4 pa-5">
     <v-row justify="center" align="center">
       <v-col cols="12">
@@ -10,15 +9,18 @@
             rounded
             style="flex: none;padding: 0 4px;"
           >
-            <v-list-item :to="root.url" style="flex: none;padding: 0 4px;"> {{ root.name }}</v-list-item>
-            <v-list-item :key="index" v-if="index !== roots.length-1 ? !isHidden : isHidden"
-                         style="width: 5px;flex: none;padding: 0 4px;">/
+            <v-list-item :to="root.url" style="flex: none;padding: 0 4px;">
+              {{ root.name }}
             </v-list-item>
-
-
+            <v-list-item
+              v-if="index !== roots.length-1 ? !isHidden : isHidden"
+              :key="index"
+              style="width: 5px;flex: none;padding: 0 4px;"
+            >
+              /
+            </v-list-item>
           </v-list-item>
-          <v-spacer></v-spacer>
-
+          <v-spacer />
         </v-card>
         <v-row>
           <v-col flat width="450" cols="4">
@@ -29,7 +31,7 @@
               >
                 <v-card flat>
                   <v-card-text>
-                    <v-img width="450" height="450" contain :src="image.father.image"></v-img>
+                    <v-img width="450" height="450" contain :src="image.father.image" />
                   </v-card-text>
                 </v-card>
               </v-tab-item>
@@ -43,7 +45,7 @@
                 v-for="image in images"
                 :key="image.id"
               >
-                <v-img width="60" height="60" contain :src="image.image"></v-img>
+                <v-img width="60" height="60" contain :src="image.image" />
               </v-tab>
             </v-tabs>
           </v-col>
@@ -54,13 +56,12 @@
                   {{ data ? data.name : '' }}
                 </h2>
               </v-col>
-              <v-spacer></v-spacer>
+              <v-spacer />
               <v-col class="col-auto mr-auto ma-auto">
                 <v-row
                   align="center"
                   class="mx-0"
                 >
-
                   <v-rating
                     :value="data ? data.rating : 0"
                     color="amber"
@@ -69,7 +70,7 @@
                     half-increments
                     readonly
                     size="14"
-                  ></v-rating>
+                  />
                   <div class="grey--text ms-4">
                     {{ data ? data.rating : '۰' }}
                   </div>
@@ -84,22 +85,22 @@
                 </p>
               </v-col>
             </v-row>
-            <v-row class="mt-12">
-            </v-row>
+            <v-row class="mt-12" />
             <v-row class="mt-12">
               <v-col class="col-auto ma-auto">
                 <h3>
                   {{ price_persian }} تومان
                 </h3>
-
               </v-col>
               <v-col class="col-auto ma-auto">
-                <v-chip class="black--text ms-4 ma-auto"
-                        :color=" data && data.available ? available_color : null">
+                <v-chip
+                  class="black--text ms-4 ma-auto"
+                  :color=" data && data.available ? available_color : null"
+                >
                   {{ data && data.available ? "موجود" : "ناموجود" }}
                 </v-chip>
               </v-col>
-              <v-spacer></v-spacer>
+              <v-spacer />
               <v-col class="col-auto ma-auto">
                 <v-btn
                   class="white--text btn_main_product"
@@ -109,32 +110,28 @@
                 >
                   افزودن به سبد خرید
                 </v-btn>
-
               </v-col>
             </v-row>
           </v-col>
         </v-row>
         <v-row>
-          <p class="ma-12" style="line-height: 1.8" v-html="detailed_description">
-          </p>
-
+          <p class="ma-12" style="line-height: 1.8" v-html="detailed_description" />
         </v-row>
         <v-row>
-          <CardProductRelatedLList :products=" data? data.related_products : ''"/>
+          <CardProductRelatedLList :products=" data? data.related_products : ''" />
         </v-row>
       </v-col>
     </v-row>
   </v-card>
-
 </template>
 
 <script>
-import CardProductRelatedLList from "../../../../../components/CardProductRelatedLList";
+import CardProductRelatedLList from '../../../../../components/CardProductRelatedLList'
 
 export default {
-  name: "index",
-  components: {CardProductRelatedLList},
-  data() {
+  name: 'Index',
+  components: { CardProductRelatedLList },
+  data () {
     return {
       read_description: false,
       tab: null,
@@ -142,57 +139,54 @@ export default {
       slug: this.$route.params.slug,
       roots: null,
       images: [],
-      price_persian: "",
-      available_color: "green accent-2",
+      price_persian: '',
+      available_color: 'green accent-2',
       data: null,
       detailed_description: null
     }
   },
-  mounted() {
-    this.$axios.get("/api/products/detail/" + this.id + "/" + this.slug + "/")
-      .then(response => {
+  mounted () {
+    this.$axios.get('/api/products/detail/' + this.id + '/' + this.slug + '/')
+      .then((response) => {
         this.roots = response.data.roots
         this.data = response.data
         this.images = response.data.smallimages
         this.price_persian = this.getPersianNumbers(this.data.price)
-        console.log(this.data.detailed_description)
         this.detailed_description = this.data.detailed_description.replace(/(\\r)*\n/g, '<br>')
-        console.log(this.detailed_description)
       })
       .catch()
   },
   methods: {
-    getPersianNumbers(price_number) {
-      var out = ""
-      const price_l = price_number.length
-      for (let i = 0; i < price_l; i++) {
-        let lastnumber = price_number % 10;
-        price_number = parseInt(price_number / 10)
-        if (i % 3 == 0 && i < price_l - 1 && i > 1) {
-          out = "," + out
+    getPersianNumbers (priceNumber) {
+      let out = ''
+      const priceL = priceNumber.length
+      for (let i = 0; i < priceL; i++) {
+        const lastnumber = priceNumber % 10
+        priceNumber = parseInt(priceNumber / 10)
+        if (i % 3 === 0 && i < priceL - 1 && i > 1) {
+          out = ',' + out
         }
-        if (lastnumber == 0) {
-          out = "۰" + out
-        } else if (lastnumber == 1) {
-          out = "۱" + out
-        } else if (lastnumber == 2) {
-          out = "۲" + out
-        } else if (lastnumber == 3) {
-          out = "۳" + out
-        } else if (lastnumber == 4) {
-          out = "۴" + out
-        } else if (lastnumber == 5) {
-          out = "۵" + out
-        } else if (lastnumber == 6) {
-          out = "۶" + out
-        } else if (lastnumber == 7) {
-          out = "۷" + out
-        } else if (lastnumber == 8) {
-          out = "۸" + out
-        } else if (lastnumber == 9) {
-          out = "۹" + out
+        if (lastnumber === 0) {
+          out = '۰' + out
+        } else if (lastnumber === 1) {
+          out = '۱' + out
+        } else if (lastnumber === 2) {
+          out = '۲' + out
+        } else if (lastnumber === 3) {
+          out = '۳' + out
+        } else if (lastnumber === 4) {
+          out = '۴' + out
+        } else if (lastnumber === 5) {
+          out = '۵' + out
+        } else if (lastnumber === 6) {
+          out = '۶' + out
+        } else if (lastnumber === 7) {
+          out = '۷' + out
+        } else if (lastnumber === 8) {
+          out = '۸' + out
+        } else if (lastnumber === 9) {
+          out = '۹' + out
         }
-
       }
       return out
     }

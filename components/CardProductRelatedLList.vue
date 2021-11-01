@@ -9,41 +9,42 @@
       multiple
     >
       <v-slide-item
-        v-for="(product, index) in products"
+        v-for="(product, index) in data"
         :key="index"
-        v-slot="{ active, toggle }"
         align="right"
       >
-        <CardProductRelated :product="product"/>
-
+        <CardProductRelated :product="product" />
       </v-slide-item>
     </v-slide-group>
   </v-sheet>
 </template>
 
 <script>
-import CardProductRelated from "./CardProductRelated";
+import CardProductRelated from './CardProductRelated'
 
 export default {
-  name: "CardProductRelatedLList",
-  components: {CardProductRelated},
-  data() {
-    return {
-      products: null,
+  name: 'CardProductRelatedLList',
+  components: { CardProductRelated },
+  props: {
+    products: {
+      default: null,
+      type: Object
     }
   },
-  props: {
-    products: Object
+  data () {
+    return {
+      data: this.products
+    }
   },
   watch: {
     products: {
       immediate: true,
       deep: true,
-      handler(newV) {
-        this.products = newV
+      handler (newV) {
+        this.data = newV
       }
-    },
-  },
+    }
+  }
 }
 </script>
 

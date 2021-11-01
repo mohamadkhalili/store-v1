@@ -1,10 +1,13 @@
 <template>
   <v-form>
     <v-container fluid pa-0 sele>
-      <v-row align="center" justify="center"
-             style="height:100vh" dense>
+      <v-row
+        align="center"
+        justify="center"
+        style="height:100vh"
+        dense
+      >
         <v-col cols="12" class="fill-height d-flex flex-column justify-center align-center">
-
           <v-card
             elevation="2"
             outlined
@@ -12,16 +15,20 @@
             :loading="loading"
             :disabled="disabled"
           >
-            <div class=" ma-auto mt-3"
-                 style="max-width: 100px">
-              <router-link to="/"
+            <div
+              class=" ma-auto mt-3"
+              style="max-width: 100px"
+            >
+              <router-link
+                to="/"
               >
-                <v-img src="/logo.png"
-                       alt="Vuetify.js"
-                       class="l-1"
-                       height="100"
-                       width="100"
-                       contain
+                <v-img
+                  src="/logo.png"
+                  alt="Vuetify.js"
+                  class="l-1"
+                  height="100"
+                  width="100"
+                  contain
                 />
               </router-link>
             </div>
@@ -41,7 +48,7 @@
               clearable
               @keypress.enter="submitlogin"
               @click:append="showpass = !showpass"
-            ></v-text-field>
+            />
             <div class="ma-4">
               <v-btn
                 block
@@ -62,37 +69,29 @@
 </template>
 
 <script>
-import {SIGNIN} from "../../../store/types/action-types";
+import { SIGNIN } from '../../../store/types/action-types'
 
 export default {
-  name: "confirm",
-  data() {
+  name: 'Confirm',
+  data () {
     return {
       showpass: false,
       loading: false,
       password: null
     }
   },
-  beforeCreate() {
-            console.log('lel',this.$store.state.user.user.phone)
-
-  },
-  created() {
-
-  },
-  mounted() {
-    console.log('ll',this.$store.state.user.user.phone)
-    if (this.$store.state.user.user.phone == '') {
-      this.$router.push('/users/login/register')
-    }
-  },
   computed: {
-    phonenumber() {
+    phonenumber () {
       return this.$store.state.user.user.phone
     }
   },
+  mounted () {
+    if (this.$store.state.user.user.phone === '') {
+      this.$router.push('/users/login/register')
+    }
+  },
   methods: {
-    async submitlogin(event) {
+    async submitlogin (event) {
       event.preventDefault()
       await this.$store.dispatch('user/user/' + SIGNIN, this.password)
       this.$router.push('/')

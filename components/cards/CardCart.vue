@@ -12,7 +12,7 @@
             max-width="180px"
             width="180px"
             :src="product.image_icon.image"
-          ></v-img>
+          />
         </nuxt-link>
       </v-col>
       <v-col class="ml-auto">
@@ -20,13 +20,16 @@
           {{ product.name }}
         </v-card-title>
         <v-row style="width: 180px !important;" class="mr-2 mt-12 text-center justify-center align-center">
-          <quantity-selector :max="product.stock" :min="1" :init="product.quantity_number"
-                             :product-id="product.id"></quantity-selector>
-
+          <quantity-selector
+            :max="product.stock"
+            :min="1"
+            :init="product.quantity_number"
+            :product-id="product.id"
+          />
           <a @click="deleteProduct(product.id)">
             <v-card-subtitle style="color: black">
-              <v-icon small
-
+              <v-icon
+                small
               >
                 mdi-delete
               </v-icon>
@@ -42,20 +45,24 @@
         </v-card-title>
       </v-col>
     </v-row>
-
   </v-card>
 </template>
 
 <script>
-import QuantitySelector from "@/components/objects/QuantitySelector";
-import {DELETE_CARD, GET_CARD} from "@/store/types/action-types";
+import QuantitySelector from '@/components/objects/QuantitySelector'
+import { DELETE_CARD, GET_CARD } from '@/store/types/action-types'
 
 export default {
-  name: "CardCart",
-  components: {QuantitySelector},
-  props: ["product"],
+  name: 'CardCart',
+  components: { QuantitySelector },
+  props: {
+    product: {
+      default: null,
+      type: Object
+    }
+  },
   methods: {
-    async deleteProduct(productId) {
+    async deleteProduct (productId) {
       await this.$store.dispatch('cart/' + DELETE_CARD, productId)
       await this.$store.dispatch('cart/' + GET_CARD)
     }

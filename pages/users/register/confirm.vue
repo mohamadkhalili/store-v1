@@ -1,10 +1,7 @@
-<template>
-
-</template>
 
 <script>
 export default {
-  name: "confirm"
+  name: 'Confirm'
 }
 </script>
 

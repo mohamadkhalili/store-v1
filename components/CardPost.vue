@@ -1,21 +1,20 @@
 <template>
-
   <v-card
-    :color="post.color"
+    :color="data.color"
     dark
   >
     <div class="d-flex flex-no-wrap justify-space-between">
       <div>
         <v-card-title
           class="text-h5"
-          v-text="post.title"
-        ></v-card-title>
+          v-text="data.title"
+        />
 
-        <v-card-subtitle v-text="post.artist"></v-card-subtitle>
+        <v-card-subtitle v-text="data.artist" />
 
         <v-card-actions>
           <v-btn
-            v-if="post.artist === 'Ellie Goulding'"
+            v-if="data.artist === 'Ellie Goulding'"
             class="ml-2 mt-3"
             fab
             icon
@@ -43,7 +42,7 @@
         size="125"
         tile
       >
-        <v-img :src="post.src"></v-img>
+        <v-img :src="data.src" />
       </v-avatar>
     </div>
   </v-card>
@@ -51,24 +50,27 @@
 
 <script>
 export default {
-  name: "CardPost",
-  data() {
-    return {
-      post: null,
+  name: 'CardPost',
+  props: {
+    post: {
+      default: null,
+      type: Object
     }
   },
-  props: {
-    post: Object
+  data () {
+    return {
+      data: this.post
+    }
   },
   watch: {
     post: {
       immediate: true,
       deep: true,
-      handler(newV) {
-        this.post = newV
+      handler (newV) {
+        this.data = newV
       }
-    },
-  },
+    }
+  }
 }
 </script>
 

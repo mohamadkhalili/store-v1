@@ -4,15 +4,15 @@
 
 <script>
 
-import {SIGNOUT} from "../../store/types/action-types";
+import { SIGNOUT } from '../../store/types/action-types'
 
 export default {
-  name: "logout",
-  created() {
+  name: 'Logout',
+  created () {
     this.logout()
   },
   methods: {
-    async logout() {
+    async logout () {
       await this.$store.dispatch('user/user/' + SIGNOUT)
       this.$router.push('/')
     }

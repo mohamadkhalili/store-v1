@@ -1,7 +1,9 @@
 <template>
-  <v-row no-gutters>
+  <v-row
+    v-if="products != []"
+    no-gutters
+  >
     <v-col
-      v-if="products != []"
       v-for="(product, index) in products"
       :key="index"
       cols="12"
@@ -11,19 +13,22 @@
       lg="3"
       xl="3"
     >
-      <card-product :product="product"/>
+      <card-product :product="product" />
     </v-col>
   </v-row>
 </template>
 
 <script>
-import CardProduct from "./CardProduct";
+import CardProduct from './CardProduct'
 
 export default {
-  name: "GridCardProduct",
-  components: {CardProduct},
+  name: 'GridCardProduct',
+  components: { CardProduct },
   props: {
-    products: Array
+    products: {
+      default: null,
+      type: Array
+    }
   }
 }
 </script>

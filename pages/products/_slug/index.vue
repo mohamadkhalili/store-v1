@@ -1,6 +1,7 @@
 <template>
   <v-card
-    v-show="products && products[0] && products[0].url != null ? !false : false">
+    v-show="products && products[0] && products[0].url != null ? !false : false"
+  >
     <v-row class="d-flex pt-4" style="width: 100%; margin: 0">
       <h5 class="text-center align-center align-content-center d-flex pa-2">
         مرتب کردن بر اساس
@@ -19,47 +20,46 @@
         color="#cb9238"
         class="pa-0 ma-0"
         style="max-width: 200px"
-      ></v-select>
-
+      />
     </v-row>
-    <grid-card-product :products="products"/>
+    <grid-card-product :products="products" />
   </v-card>
 </template>
 
 <script>
-import {GET_PRODUCTS} from "../../../store/types/action-types";
+import { GET_PRODUCTS } from '../../../store/types/action-types'
 
 export default {
-  name: "index",
-  data() {
+  name: 'Index',
+  data () {
     return {
       slug: this.$route.params.slug,
       select: 'newest',
       items: [
-        {name: 'جدیدترین', value: 'newest'},
-        {name: 'گرانترین', value: 'expensivest'},
-        {name: 'ارزانترین', value: 'cheapest'},
-        {name: 'پرفروش‌ترین‌', value: 'bestselling'},
-      ],
+        { name: 'جدیدترین', value: 'newest' },
+        { name: 'گرانترین', value: 'expensivest' },
+        { name: 'ارزانترین', value: 'cheapest' },
+        { name: 'پرفروش‌ترین‌', value: 'bestselling' }
+      ]
     }
   },
   computed: {
-    products() {
+    products () {
       return this.$store.state.product.list.products
     }
-  },
-  async mounted() {
-    await this.$store.dispatch('product/list/' + GET_PRODUCTS, {url: this.slug, query: this.select})
   },
   watch: {
     select: {
       immediate: true,
       deep: true,
-      async handler(select) {
-        await this.$store.dispatch('product/list/' + GET_PRODUCTS, {url: this.slug, query: select})
+      async handler (select) {
+        await this.$store.dispatch('product/list/' + GET_PRODUCTS, { url: this.slug, query: select })
       }
-    },
+    }
   },
+  async mounted () {
+    await this.$store.dispatch('product/list/' + GET_PRODUCTS, { url: this.slug, query: this.select })
+  }
 }
 </script>
 

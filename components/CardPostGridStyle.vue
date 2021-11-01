@@ -10,46 +10,53 @@
         color="deep-purple"
         height="10"
         indeterminate
-      ></v-progress-linear>
+      />
     </template>
 
     <router-link
-      :to="post.url">
+      :to="data.url"
+    >
       <v-img
         contain
         height="250"
         max-height="250"
-        :src="post.image_icon.image"
-      ></v-img>
+        :src="data.image_icon.image"
+      />
     </router-link>
 
     <router-link
-      :to="post.root.url" class="text-decoration-none">
-      <h6 pill class=" black--text ms-4 mt-3 text-decoration-none "
+      :to="data.root.url"
+      class="text-decoration-none"
+    >
+      <h6
+        pill
+        class=" black--text ms-4 mt-3 text-decoration-none "
 
-          style="color: #e51a2d !important;font-family: tanha !important;"
-          :color="available_color">
-        {{ post.root.name }}
-
+        style="color: #e51a2d !important;font-family: tanha !important;"
+        :color="available_color"
+      >
+        {{ data.root.name }}
       </h6>
     </router-link>
 
-    <v-card-title class="text-h6"
-                  style="height: 64px;max-height: 64px;flex-wrap: nowrap;overflow-x: auto;font-family: IRANYekan">{{
+    <v-card-title
+      class="text-h6"
+      style="height: 64px;max-height: 64px;flex-wrap: nowrap;overflow-x: auto;font-family: IRANYekan"
+    >
+      {{
         post.title
       }}
     </v-card-title>
 
-
     <v-card-text>
-
       <div
         style="height: 44px;max-height: 44px;flex-wrap: nowrap;overflow-x: auto;"
-      >{{ post.brief_description }}
+      >
+        {{ data.brief_description }}
       </div>
     </v-card-text>
 
-    <v-divider class="mx-4"></v-divider>
+    <v-divider class="mx-4" />
 
     <v-card-text>
       <div class="my-4 text-subtitle-1">
@@ -57,44 +64,44 @@
           align="center"
           class="mx-0"
         >
-          <v-chip v-on="on" pill :to="post.author.url" class="black--text" color="available_color">
-            {{ post.author.name }}
+          <v-chip pill :to="data.author.url" class="black--text" color="available_color" v-on="on">
+            {{ data.author.name }}
           </v-chip>
-          <v-spacer></v-spacer>
+          <v-spacer />
 
           <div class="text-caption my-4 text-subtitle-1" style="direction: ltr !important;">
-            {{ post.published_date }}
+            {{ data.published_date }}
           </div>
-
-
         </v-row>
       </div>
     </v-card-text>
-
   </v-card>
 </template>
 
 <script>
 export default {
-  name: "CardPostGridStyle",
-  data() {
-    return {
-      post: null,
-      available_color: "#e51a2d"
+  name: 'CardPostGridStyle',
+  props: {
+    post: {
+      default: null,
+      type: Object
     }
   },
-  props: {
-    post: Object
+  data () {
+    return {
+      data: this.post,
+      available_color: '#e51a2d'
+    }
   },
   watch: {
     post: {
       immediate: true,
       deep: true,
-      handler(newV) {
-        this.post = newV
+      handler (newV) {
+        this.data = newV
       }
-    },
-  },
+    }
+  }
 }
 </script>
 

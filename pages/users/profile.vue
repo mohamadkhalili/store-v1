@@ -18,8 +18,6 @@
               >
                 <edit-two-text-field
                   :loading="loading"
-                  :click-exit="nameDialogClick"
-                  :click-accept="nameClickAccept"
                   title="نام و نام خانوادگی"
                   label-text1="نام"
                   label-text2="نام خانوادگی"
@@ -28,6 +26,8 @@
                   :input-text2="last_name"
                   :error1="error.first_name"
                   :error2="error.last_name"
+                  @clickExit="nameDialogClick"
+                  @clickAccept="nameClickAccept"
                 />
               </v-dialog>
             </v-col>
@@ -48,13 +48,13 @@
               >
                 <edit-one-text-field
                   :loading="loading"
-                  :click-exit="phoneDialogClick"
-                  :click-accept="phoneClickAccept"
                   title="شماره تلفن همراه"
                   label-text="شماره همراه"
                   label-button="ثبت اطلاعات"
                   :input-text="phone"
                   :error="error.phone"
+                  @clickExit="phoneDialogClick"
+                  @clickAccept="phoneClickAccept"
                 />
               </v-dialog>
             </v-col>
@@ -71,13 +71,13 @@
               >
                 <edit-one-text-field
                   :loading="loading"
-                  :click-exit="emailDialogClick"
-                  :click-accept="emailClickAccept"
                   title="ایمیل"
                   label-text="ایمیل"
                   label-button="ثبت اطلاعات"
                   :input-text="email"
                   :error="error.email"
+                  @clickExit="emailDialogClick"
+                  @clickAccept="emailClickAccept"
                 />
               </v-dialog>
             </v-col>
@@ -98,13 +98,13 @@
               >
                 <edit-one-text-field
                   :loading="loading"
-                  :click-exit="nationalCodeDialogClick"
-                  :click-accept="nationalCodeClickAccept"
                   title="کد ملی"
                   label-text="کد ملی"
                   label-button="ثبت اطلاعات"
                   :input-text="national_code"
                   :error="error.national_code"
+                  @clickExit="nationalCodeDialogClick"
+                  @clickAccept="nationalCodeClickAccept"
                 />
               </v-dialog>
             </v-col>
@@ -125,13 +125,13 @@
               >
                 <edit-one-text-field
                   :loading="loading"
-                  :click-exit="postalCodeDialogClick"
-                  :click-accept="postalCodeClickAccept"
                   title="کد پستی"
                   label-text="کد پستی"
                   label-button="ثبت اطلاعات"
                   :input-text="postal_code"
                   :error="error.postal_code"
+                  @clickExit="postalCodeDialogClick"
+                  @clickAccept="postalCodeClickAccept"
                 />
               </v-dialog>
             </v-col>
@@ -152,13 +152,13 @@
               >
                 <edit-one-text-field
                   :loading="loading"
-                  :click-exit="jobDialogClick"
-                  :click-accept="jobClickAccept"
                   title="شغل"
                   label-text="شغل"
                   label-button="ثبت اطلاعات"
                   :input-text="job"
                   :error="error.job"
+                  @clickExit="jobDialogClick"
+                  @clickAccept="jobClickAccept"
                 />
               </v-dialog>
             </v-col>
@@ -179,13 +179,13 @@
               >
                 <edit-one-textarea
                   :loading="loading"
-                  :click-exit="addressCodeDialogClick"
-                  :click-accept="addressClickAccept"
                   title="آدرس"
                   label-text="آدرس"
                   label-button="ثبت اطلاعات"
                   :input-text="address"
                   :error="error.address"
+                  @clickExit="addressCodeDialogClick"
+                  @clickAccept="addressClickAccept"
                 />
               </v-dialog>
             </v-col>
@@ -203,7 +203,11 @@
             </v-list-item>
             <v-divider />
             <template v-for="(order, index) in orders">
-              <v-list-item v-if="index < 3" :key="index" :style="(index % 2) != 1 ? 'background-color: #fbfbfb;' : 'background-color: #fff;'">
+              <v-list-item
+                v-if="index < 3"
+                :key="index"
+                :style="(index % 2) != 1 ? 'background-color: #fbfbfb;' : 'background-color: #fff;'"
+              >
                 <list-item-order1 :data="order" color="#535353" />
                 <v-divider />
               </v-list-item>

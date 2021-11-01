@@ -10,20 +10,22 @@
         color="deep-purple"
         height="10"
         indeterminate
-      ></v-progress-linear>
+      />
     </template>
 
     <router-link
-      :to="product.url">
+      :to="product.url"
+    >
       <v-img
         contain
         height="250"
         max-height="250"
         :src="product.image_icon.image"
-      ></v-img>
+      />
     </router-link>
 
-    <v-card-title style="height: 64px;max-height: 64px;flex-wrap: nowrap;overflow-x: auto;">{{
+    <v-card-title style="height: 64px;max-height: 64px;flex-wrap: nowrap;overflow-x: auto;">
+      {{
         product.name
       }}
     </v-card-title>
@@ -41,7 +43,7 @@
           half-increments
           readonly
           size="14"
-        ></v-rating>
+        />
 
         <div class="grey--text ms-4">
           {{ product.rating }}
@@ -55,18 +57,16 @@
           <h3 class="my-4">
             {{ price_persian }} تومان
           </h3>
-          <v-spacer></v-spacer>
+          <v-spacer />
 
           <v-chip class="black--text ms-4" :color=" product.available ? available_color : null">
             {{ product.available ? "موجود" : "ناموجود" }}
           </v-chip>
         </v-row>
       </div>
-
     </v-card-text>
 
-    <v-divider class="mx-4"></v-divider>
-
+    <v-divider class="mx-4" />
 
     <v-card-actions>
       <v-col class="col-auto mr-auto">
@@ -79,37 +79,39 @@
         >
           افزودن به سبد خرید
         </v-btn>
-
       </v-col>
     </v-card-actions>
   </v-card>
 </template>
 
 <script>
-import {ADD_CARD} from "../store/types/action-types";
+import { ADD_CARD } from '../store/types/action-types'
 
 export default {
-  name: "CardProduct",
-  data() {
-    return {
-      available_color: "green accent-2",
-      price_persian: ""
+  name: 'CardProduct',
+  props: {
+    product: {
+      default: null,
+      type: Object
     }
   },
-  props: {
-    product: Object
+  data () {
+    return {
+      available_color: 'green accent-2',
+      price_persian: ''
+    }
   },
   watch: {
     product: {
       immediate: true,
       deep: true,
-      handler(newV) {
+      handler (newV) {
         this.price_persian = this.$tocomonum(this.product.price)
       }
-    },
+    }
   },
   methods: {
-    add_product(id) {
+    add_product (id) {
       this.$store.dispatch('cart/' + ADD_CARD, id)
     }
   }
