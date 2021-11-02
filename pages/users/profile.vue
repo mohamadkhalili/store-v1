@@ -8,8 +8,8 @@
               <info-with-title
                 title="نام و نام خانوادگی:"
                 :value="first_name + ' ' + last_name"
-                :click="nameDialogClick"
                 direction="rtl"
+                @click="nameDialogClick"
               />
               <v-dialog
                 v-model="name_dialog"
@@ -38,8 +38,8 @@
               <info-with-title
                 title="شماره تلفن همراه:"
                 :value="phone"
-                :click="phoneDialogClick"
                 direction="rtl"
+                @click="phoneDialogClick"
               />
               <v-dialog
                 v-model="phone_dialog"
@@ -62,7 +62,7 @@
           <v-divider />
           <v-row style="height: 25% !important;" no-gutters>
             <v-col cols="6" class="align-center align-self-center">
-              <info-with-title title="ایمیل:" :value="email" :click="emailDialogClick" direction="rtl" />
+              <info-with-title title="ایمیل:" :value="email" direction="rtl" @click="emailDialogClick" />
 
               <v-dialog
                 v-model="email_dialog"
@@ -88,8 +88,8 @@
               <info-with-title
                 title="کد ملی:"
                 :value="national_code"
-                :click="nationalCodeDialogClick"
                 direction="rtl"
+                @click="nationalCodeDialogClick"
               />
               <v-dialog
                 v-model="national_code_dialog"
@@ -115,8 +115,8 @@
               <info-with-title
                 title="کد پستی:"
                 :value="postal_code"
-                :click="postalCodeDialogClick"
                 direction="rtl"
+                @click="postalCodeDialogClick"
               />
               <v-dialog
                 v-model="postal_code_dialog"
@@ -142,8 +142,8 @@
               <info-with-title
                 title="شغل:"
                 :value="job"
-                :click="jobDialogClick"
                 direction="rtl"
+                @click="jobDialogClick"
               />
               <v-dialog
                 v-model="job_dialog"
@@ -169,8 +169,8 @@
               <info-with-title
                 title="آدرس:"
                 :value="address"
-                :click="addressCodeDialogClick"
                 direction="rtl"
+                @click="addressCodeDialogClick"
               />
               <v-dialog
                 v-model="address_dialog"
@@ -252,13 +252,13 @@ export default {
   },
   data () {
     return {
-      name_dialog: null,
-      phone_dialog: null,
-      email_dialog: null,
-      national_code_dialog: null,
-      postal_code_dialog: null,
-      job_dialog: null,
-      address_dialog: null
+      name_dialog: false,
+      phone_dialog: false,
+      email_dialog: false,
+      national_code_dialog: false,
+      postal_code_dialog: false,
+      job_dialog: false,
+      address_dialog: false
     }
   },
   computed: {

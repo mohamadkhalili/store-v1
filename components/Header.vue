@@ -19,13 +19,13 @@
       <v-menu
         offset-y
       >
-        <template #activator="{ On, Attrs }">
+        <template #activator="{ on, attrs }">
           <v-btn
             color="#cb9238"
             class="mx-8"
             plain
-            v-bind="Attrs"
-            v-on="On"
+            v-bind="attrs"
+            v-on="on"
           >
             <v-icon size="30" color="rgba(0, 0, 0, 0.87)">
               mdi-account-circle-outline
@@ -78,21 +78,18 @@
       open-on-hover
       z-index="10"
     >
-      <template #activator="{ On, Attrs }">
+      <template #activator="{ on, attrs }">
         <v-btn
           class="pa-0"
           plain
-          v-bind="Attrs"
-          v-on="On"
+          v-bind="attrs"
+          v-on="on"
         >
           <v-badge
-
             bordered
             overlap
             color="secondary"
             :content="count"
-            v-bind="attrs"
-            v-on="on"
           >
             <v-icon>mdi-cart-outline</v-icon>
           </v-badge>
@@ -170,12 +167,12 @@
                   offset-y
                   left
                 >
-                  <template #activator="{ On, Attrs }">
+                  <template #activator="{ on, attrs }">
                     <v-tab
                       :to="menu.url"
                       style="z-index: 2"
-                      v-bind="Attrs"
-                      v-on="On"
+                      v-bind="attrs"
+                      v-on="on"
                     >
                       {{ menu.name }}
                     </v-tab>
