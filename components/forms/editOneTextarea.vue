@@ -13,7 +13,7 @@
           class="mt-3 ml-2"
           text
           icon
-          color="red lighten-2"
+          color="primary"
           @click="clickExit"
         >
           <v-icon style="color: #515151;">

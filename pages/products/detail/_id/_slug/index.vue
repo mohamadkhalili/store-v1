@@ -104,7 +104,7 @@
               <v-col class="col-auto ma-auto">
                 <v-btn
                   class="white--text btn_main_product"
-                  color="red darken-1"
+                  color="primary"
                   x-large
                   :disabled="data && data.available ? false : true"
                 >

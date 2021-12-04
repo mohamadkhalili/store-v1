@@ -209,7 +209,6 @@
                 :style="(index % 2) != 1 ? 'background-color: #fbfbfb;' : 'background-color: #fff;'"
               >
                 <list-item-order1 :data="order" color="#535353" />
-                <v-divider />
               </v-list-item>
             </template>
           </v-list>
@@ -222,6 +221,26 @@
       </v-col>
     </v-row>
     <v-card class="mt-4">
+      <v-col>
+        <v-row>
+          <v-card-title>آدرس ها</v-card-title>
+          <v-spacer />
+          <v-btn
+            class="ma-4"
+            color="primary"
+            outlined
+            @click="addAddressDialog = true"
+          >
+            افزودن آدرس جدید
+          </v-btn>
+          <v-dialog
+            v-model="addAddressDialog"
+            width="500"
+          >
+            <address-edit-dialog />
+          </v-dialog>
+        </v-row>
+      </v-col>
       <v-row class="align-self-center">
         <template v-for="(Address,index) in addresses">
           <address-profile :key="index" :address="Address" />
@@ -236,13 +255,15 @@ import InfoWithTitle from '../../components/objects/infoWithTitle'
 import EditTwoTextField from '../../components/forms/editTwoTextField'
 import EditOneTextField from '../../components/forms/editOneTextField'
 import EditOneTextarea from '../../components/forms/editOneTextarea'
-import { EDIT_USER_INFORMATION, GET_ORDER, GET_ORDERS } from '../../store/types/action-types'
+import { EDIT_USER_INFORMATION, GET_CITIES, GET_ORDER, GET_ORDERS, GET_STATES } from '../../store/types/action-types'
 import AddressProfile from '../../components/cards/AddressProfile'
+import AddressEditDialog from '../../components/pages/orders/AddressEditDialog'
 import ListItemOrder1 from '~/components/objects/ListItemOrder1'
 
 export default {
   name: 'Profile',
   components: {
+    AddressEditDialog,
     AddressProfile,
     EditOneTextarea,
     EditTwoTextField,
@@ -258,10 +279,18 @@ export default {
       national_code_dialog: false,
       postal_code_dialog: false,
       job_dialog: false,
-      address_dialog: false
+      address_dialog: false,
+      stateValue: null,
+      addAddressDialog: false
     }
   },
   computed: {
+    cities () {
+      return this.$store.state.user.user.cities
+    },
+    states () {
+      return this.$store.state.user.user.states
+    },
     addresses () {
       return this.$store.state.user.orders.addresses
     },
@@ -303,8 +332,12 @@ export default {
   mounted () {
     this.$store.dispatch('user/orders/' + GET_ORDERS)
     this.$store.dispatch('user/orders/' + GET_ORDER)
+    this.$store.dispatch('user/user/' + GET_STATES)
   },
   methods: {
+    changeState () {
+      this.$store.dispatch('user/user/' + GET_CITIES, this.stateValue)
+    },
     nameDialogClick () {
       this.name_dialog = !this.name_dialog
     },

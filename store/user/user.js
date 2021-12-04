@@ -1,20 +1,31 @@
-//mutation variables
+// mutation variables
 import {
-  SET_AFTER_EDIT_INFORMATION, SET_ERROR_PHONE_PASS,
+  SET_AFTER_EDIT_INFORMATION,
+  SET_CITIES,
+  SET_ERROR_PHONE_PASS,
   SET_LOADING_USER,
   SET_PHONE,
   SET_SESSIONID,
+  SET_STATES,
   SET_STATUS_REGISTER,
   SET_USER_LOGIN
-} from "../types/mutation-types";
-//action variables
-import {CHECK_PHONE, EDIT_USER_INFORMATION, GET_CSF, GET_USER, SIGNIN, SIGNOUT} from "../types/action-types";
+} from '../types/mutation-types'
+// action variables
+import {
+  CHECK_PHONE,
+  EDIT_USER_INFORMATION,
+  GET_CITIES,
+  GET_CSF,
+  GET_STATES,
+  GET_USER,
+  SIGNIN,
+  SIGNOUT
+} from '../types/action-types'
 
-
-//state
+// state
 export const state = () => ({
   loading: false,
-  status_register: false, //if phone registered equal true //status register
+  status_register: false, // if phone registered equal true //status register
   status_signin: false,
   status_signup: false,
   address: '',
@@ -42,17 +53,25 @@ export const state = () => ({
     first_name: null,
     last_name: null
   },
+  states: [],
+  cities: []
 })
 
-//mutations
+// mutations
 export const mutations = {
-  [SET_PHONE](state, phone) {
+  [SET_STATES] (state, states) {
+    state.states = states
+  },
+  [SET_CITIES] (state, cities) {
+    state.cities = cities
+  },
+  [SET_PHONE] (state, phone) {
     state.phone = phone
   },
-  [SET_STATUS_REGISTER](state, status) {
+  [SET_STATUS_REGISTER] (state, status) {
     state.status_register = status
   },
-  [SET_USER_LOGIN](state, user) {
+  [SET_USER_LOGIN] (state, user) {
     state.id = user ? user.id : null
     state.address = user ? user.address : ''
     state.date_joined = user ? user.date_joined : null
@@ -68,10 +87,10 @@ export const mutations = {
     state.postal_code = user ? user.postal_code : null
     state.phone = user ? (user.phone) : null
   },
-  [SET_LOADING_USER](state, loading) {
+  [SET_LOADING_USER] (state, loading) {
     state.loading = loading
   },
-  [SET_AFTER_EDIT_INFORMATION](state, response) {
+  [SET_AFTER_EDIT_INFORMATION] (state, response) {
     if (response.phone) {
       state.phone = response ? response.phone : null
       state.error.phone = null
@@ -115,53 +134,58 @@ export const mutations = {
       }
     }
   },
-  [SET_ERROR_PHONE_PASS](state, status) {
+  [SET_ERROR_PHONE_PASS] (state, status) {
     state.errorPhonePass = status
   }
 }
 
-//actions
+// actions
 export const actions = {
-  async [CHECK_PHONE]({dispatch, commit, rootState, state}, phone) {
-
-    await dispatch('user/auth/' + GET_CSF, '', {root: true})
+  async [GET_STATES] ({ commit }) {
+    const req = await this.$axios.get('/api/states/')
+    commit(SET_STATES, req.data)
+  },
+  async [GET_CITIES] ({ commit }, id) {
+    const req = await this.$axios.get('/api/states/' + id + '/')
+    commit(SET_CITIES, req.data)
+  },
+  async [CHECK_PHONE] ({ dispatch, commit, rootState, state }, phone) {
+    await dispatch('user/auth/' + GET_CSF, '', { root: true })
     const respons = await this.$axios.$post('/api/users/login/', {
-      'phone': phone,
-      'csrfmiddlewaretoken': rootState.user.auth.csrfmiddlewaretoken
+      phone,
+      csrfmiddlewaretoken: rootState.user.auth.csrfmiddlewaretoken
     })
     commit(SET_PHONE, phone)
-    console.log('gg', phone)
     commit(SET_STATUS_REGISTER, respons.phone_found)
   },
-  async [SIGNIN]({dispatch, commit, rootState, state}, payload) {
+  async [SIGNIN] ({ dispatch, commit, rootState, state }, payload) {
     try {
       const response = await this.$axios.$post('/api/users/login/', {
-        'phone': payload.phone,
-        'password': payload.password,
+        phone: payload.phone,
+        password: payload.password
       })
       commit(SET_USER_LOGIN, response.user)
-      commit('user/auth/' + SET_SESSIONID, response.sessionid, {root: true})
-      if (response && response.sessionid)
+      commit('user/auth/' + SET_SESSIONID, response.sessionid, { root: true })
+      if (response && response.sessionid) {
         await this.$router.push('/')
-      else
+      } else {
         commit(SET_ERROR_PHONE_PASS, true)
+      }
     } catch (e) {
       commit(SET_ERROR_PHONE_PASS, true)
     }
-
   },
-  async [SIGNOUT]() {
+  async [SIGNOUT] () {
     await this.$axios.get('/api/users/logout/')
   },
-  async [GET_USER]({commit}) {
+  async [GET_USER] ({ commit }) {
     const response = await this.$axios.get('/api/supporter_datas/user/')
     commit(SET_USER_LOGIN, response.data.user)
   },
-  async [EDIT_USER_INFORMATION]({commit, dispatch}, object) {
+  async [EDIT_USER_INFORMATION] ({ commit, dispatch }, object) {
     commit(SET_LOADING_USER, true)
     try {
       const request = await this.$axios.put('/api/users/userchange/', object)
-      console.log('userchange: ', request)
       commit(SET_AFTER_EDIT_INFORMATION, request.data)
       commit(SET_LOADING_USER, false)
     } catch (e) {

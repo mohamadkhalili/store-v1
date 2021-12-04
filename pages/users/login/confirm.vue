@@ -52,7 +52,7 @@
             <div class="ma-4">
               <v-btn
                 block
-                color="red darken-1"
+                color="primary"
                 elevation="2"
                 x-large
                 class="white--text text-h6"

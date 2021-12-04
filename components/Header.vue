@@ -21,7 +21,7 @@
       >
         <template #activator="{ on, attrs }">
           <v-btn
-            color="#cb9238"
+            color="primary"
             class="mx-8"
             plain
             v-bind="attrs"
@@ -61,7 +61,7 @@
     </template>
     <template v-else>
       <v-btn
-        color="secondary"
+        color="primary"
         outlined
         class="mx-8"
         to="/users/login/register/"

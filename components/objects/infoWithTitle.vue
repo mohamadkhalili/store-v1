@@ -23,7 +23,7 @@
         class="ma-2"
         text
         icon
-        color="red lighten-2"
+        color="primary"
         @click="click"
       >
         <v-icon style="color: #515151;">

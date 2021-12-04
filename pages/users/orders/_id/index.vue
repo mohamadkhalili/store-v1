@@ -4,6 +4,7 @@
       <v-btn
         class="ma-2"
         icon
+        color="primary"
         href="/users/orders"
       >
         <v-icon>mdi-arrow-right</v-icon>

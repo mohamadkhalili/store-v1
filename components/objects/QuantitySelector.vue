@@ -61,24 +61,32 @@ export default {
   },
   methods: {
     async click_plus () {
-      if (this.init < this.max) { await this.$store.dispatch('cart/' + ADD_CARD, this.productId) }
+      if (this.init < this.max) {
+        await this.$store.dispatch('cart/' + ADD_CARD, this.productId)
+      }
       await this.$store.dispatch('cart/' + GET_CARD)
       await this.$store.dispatch('user/user/' + GET_USER)
       if (this.init < this.max) {
         this.disable_minus = false
-        if (!(this.init < this.max)) { this.disable_plus = true }
+        if (!(this.init < this.max)) {
+          this.disable_plus = true
+        }
       } else {
         this.disable_minus = false
         this.disable_plus = true
       }
     },
     async click_minus () {
-      if (this.init > this.min) { await this.$store.dispatch('cart/' + MINUS_CARD, this.productId) }
+      if (this.init > this.min) {
+        await this.$store.dispatch('cart/' + MINUS_CARD, this.productId)
+      }
       await this.$store.dispatch('cart/' + GET_CARD)
       await this.$store.dispatch('user/user/' + GET_USER)
       if (this.init > this.min) {
         this.disable_plus = false
-        if (!(this.init > this.min)) { this.disable_minus = true }
+        if (!(this.init > this.min)) {
+          this.disable_minus = true
+        }
       } else {
         this.disable_minus = true
         this.disable_plus = false

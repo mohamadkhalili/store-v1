@@ -1,7 +1,7 @@
 <template>
   <v-btn
     class="white--text btn_main_product"
-    color="red darken-1"
+    color="primary"
     :to="to"
     @click="click"
   >

@@ -11,13 +11,13 @@
         />
 
         <v-card-subtitle v-text="data.artist" />
-
         <v-card-actions>
           <v-btn
             v-if="data.artist === 'Ellie Goulding'"
             class="ml-2 mt-3"
             fab
             icon
+            color="primary"
             height="40px"
             right
             width="40px"
@@ -30,6 +30,7 @@
             class="ml-2 mt-5"
             outlined
             rounded
+            color="primary"
             small
           >
             START RADIO

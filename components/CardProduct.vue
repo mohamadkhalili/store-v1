@@ -72,7 +72,7 @@
       <v-col class="col-auto mr-auto">
         <v-btn
           class="white--text btn_main_product"
-          color="red darken-1"
+          color="primary"
           x-large
           :disabled="product && product.available ? false : true"
           @click="add_product(product.id)"
