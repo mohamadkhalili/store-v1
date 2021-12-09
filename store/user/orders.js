@@ -5,7 +5,7 @@ import {
   GET_DELETE_ADDRESS,
   GET_EDIT_ADDRESS,
   GET_ORDER,
-  GET_ORDERS,
+  GET_ORDER_ITEMS,
   GET_PRICE_SEND
 } from '../types/action-types'
 import { SET_ORDER } from '../types/mutation-types'
@@ -43,7 +43,7 @@ export const mutations = {
 }
 
 export const actions = {
-  async [GET_ORDERS] ({ commit }) {
+  async [GET_ORDER_ITEMS] ({ commit }) {
     try {
       const response = await this.$axios.get('/api/orders/orderitems/')
       commit(SET_ORDERS, response.data)

@@ -87,7 +87,7 @@
 </template>
 
 <script>
-import { GET_ORDERS } from '@/store/types/action-types'
+import { GET_ORDER_ITEMS } from '@/store/types/action-types'
 
 export default {
   name: 'Index',
@@ -99,7 +99,7 @@ export default {
   },
   computed: {},
   async mounted () {
-    await this.$store.dispatch('user/orders/' + GET_ORDERS)
+    await this.$store.dispatch('user/orders/' + GET_ORDER_ITEMS)
     const orders = this.$store.state.user.orders.orders
     orders.forEach((order) => {
       if (order.id === this.id) {

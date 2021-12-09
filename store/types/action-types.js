@@ -24,7 +24,7 @@ export const MINUS_CARD = 'MINUS_CARD'
 export const GET_PRODUCTS = 'GET_PRODUCTS'
 
 //= > user/orders.js
-export const GET_ORDERS = 'SET_ORDERS'
+export const GET_ORDER_ITEMS = 'SET_ORDERS'
 export const GET_ORDER = 'GET_ORDER'
 export const EDIT_PROFILE = 'EDIT_PROFILE'
 export const CREATE_PROFILE = 'CREATE_PROFILE'
