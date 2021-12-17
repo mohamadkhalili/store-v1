@@ -24,5 +24,5 @@ export const SET_PRODUCTS = 'SET_PRODUCTS'
 export const CLEAR_PRODUCTS = 'CLEAR_PRODUCTS'
 
 //= > user/orders.js
-export const SET_ORDERS = 'GET_ORDER|_ITEMS'
-export const SET_ORDER = 'SET_ADDRESSES'
+export const SET_ORDER_ITEMS = 'SET_ORDER_ITEMS'
+export const SET_ORDERS = 'SET_ORDERS'

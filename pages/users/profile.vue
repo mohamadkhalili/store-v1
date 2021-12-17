@@ -257,7 +257,13 @@ import EditOneTextField from '../../components/forms/editOneTextField'
 import EditOneTextarea from '../../components/forms/editOneTextarea'
 import AddressProfile from '../../components/cards/AddressProfile'
 import AddressEditDialog from '../../components/pages/orders/AddressEditDialog'
-import { EDIT_USER_INFORMATION, GET_CITIES, GET_ORDER, GET_ORDER_ITEMS, GET_STATES } from '../../store/types/action-types'
+import {
+  EDIT_USER_INFORMATION,
+  GET_CITIES,
+  GET_ORDER_ITEMS,
+  GET_ORDERS,
+  GET_STATES
+} from '../../store/types/action-types'
 import ListItemOrder1 from '~/components/objects/ListItemOrder1'
 
 export default {
@@ -331,7 +337,7 @@ export default {
   },
   mounted () {
     this.$store.dispatch('user/orders/' + GET_ORDER_ITEMS)
-    this.$store.dispatch('user/orders/' + GET_ORDER)
+    this.$store.dispatch('user/orders/' + GET_ORDERS)
     this.$store.dispatch('user/user/' + GET_STATES)
   },
   methods: {

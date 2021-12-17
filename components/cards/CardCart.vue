@@ -1,25 +1,27 @@
 <template>
   <v-card height="210" class="ma-2 mb-6">
-    <v-row>
+    <v-row style="max-height: 140px">
       <v-col style="width: 180px !important;max-width: 180px">
         <nuxt-link
           :to="product.url"
         >
           <v-img
-            contain
-            height="180px"
-            max-height="180px"
+            max-height="150px"
             max-width="180px"
-            width="180px"
             :src="product.image_icon.image"
           />
         </nuxt-link>
       </v-col>
-      <v-col class="ml-auto">
-        <v-card-title>
-          {{ product.name }}
-        </v-card-title>
-        <v-row style="width: 180px !important;" class="mr-2 mt-12 text-center justify-center align-center">
+      <v-card-title>
+        {{ product.name }}
+      </v-card-title>
+    </v-row>
+    <v-row style="max-height: 30px">
+      <v-col
+        class="ml-auto justify-center align-self-center center
+"
+      >
+        <v-row style="width: 180px !important;" class="mr-2 text-center justify-center align-center">
           <quantity-selector
             :max="product.stock"
             :min="1"
